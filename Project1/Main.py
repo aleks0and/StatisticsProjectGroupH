@@ -1,8 +1,5 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
 from numpy_excersises_tests import inner_product_test, mean_absolute_error_test,lead_and_lag_test,pairwise_distance_test
-from IPython.display import display
+
 
 
 def main():
