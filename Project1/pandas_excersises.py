@@ -54,8 +54,39 @@ def pandas_excersise1():
     bestDays = weatherdataJFK.sort_values(by=["temp"], ascending=False).head(5)
 
 def pandas_excersise2():
-    return None
+    #we specify the path, headers and number of lines to be ommited in the file
+    dataPath = r'C:\Users\Michal\Documents\GitHub\StatisticsProjectGroupH\Project1\data\nycflights13_flights.csv'
+    header = ["year","month","day","dep_time","sched_dep_time","dep_delay","arr_time","sched_arr_time",
+              "arr_delay","carrier","flight","tailnum","origin","dest","air_time","distance","hour",
+              "minute","time_hour"]
+    skipR = 54
 
+    #we are loading the data into python
+    flight_data = get_dataframe(dataPath, header, skipR)
+    
+    #We are selecting only columns between Year and Day columns
+    list_of_columns = flight_data.columns.tolist()
+    
+    if list_of_columns.index("day") > list_of_columns.index("year"):
+        flight_data_chosen = flight_data.loc[:, "year":"day"]
+    else:
+        flight_data_chosen = flight_data.loc[:, "day":"year"]
+        
+    #We are selecting only columns that do not lay between Year and Day columns
+    if list_of_columns.index("day") > list_of_columns.index("year"):
+        flight_data_left = flight_data.loc[:,:"year"]
+        flight_data_right = flight_data.loc[:,"day":]
+        flight_data_between_y_and_d = pd.concat([flight_data_left, flight_data_right], axis=1)
+        
+        print(flight_data_between_y_and_d)
+        
+    else:
+        flight_data_left = flight_data.loc[:,:"day"]
+        flight_data_right = flight_data.loc[:,"year":]
+        flight_data_outside_y_and_d = pd.concat([flight_data_left, flight_data_right], axis=1)
+        
+        print(flight_data_outside_y_and_d)
+    
 def pandas_excersise3():
 
     A = pd.read_csv(r'./data/some_birth_dates1.csv')
