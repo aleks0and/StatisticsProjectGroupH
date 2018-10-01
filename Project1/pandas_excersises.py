@@ -1,5 +1,6 @@
 #importing libraries and loading dataset
 import pandas as pd
+import matplotlib as plt
 #while displaying we want to see all the columns
 pd.set_option('display.max_columns', 100)
 
@@ -17,8 +18,12 @@ def temperature_conversion(data):
     data["temp"] = data["temp"].apply(tempConverter)
 
 
+def interpolate_and_mean(data, column):
+    data[column].interpolate().mean()
+
 #Excersise 1
 def pandas_excersise1():
+    #we specify the path, headers and number of lines to be ommited in the file
     dataPath = r'./data/nycflights13/nycflights13_weather.csv'
     header = ["origin", "year", "month", "day", "hour", "temp", "dewp", "humid", "wind_dir",
                "wind_speed", "wind_gust", "precip", "pressure", "visib", "time_hour"]
@@ -26,22 +31,30 @@ def pandas_excersise1():
 
     #loading the data
     weatherData = get_dataframe(dataPath, header, skipR)
-    print(weatherData.head())
+    print(weatherData.head(5))
 
     #displaying the loaded data
     temperature_conversion(weatherData)
-    print(weatherData.head(40))
+    print(weatherData.head(5))
 
     #finding the daily mean temperature and interpolating the missing data
     weatherdataJFK = weatherData[weatherData["origin"] == "JFK"]
-    weatherdataJFK["temp"].interpolate().mean()
-    print(weatherdataJFK.head(40))
+    #weatherdataJFK["temp"].interpolate().mean()
+    interpolate_and_mean(weatherdataJFK, "temp")
+    print(weatherdataJFK.head(5))
 
-    #getting the days with mean temperature above 0
+    #ploting the mean temperatures
+
+
+
+    #getting the days with greater mean temperature than the day before
     warmDays = weatherdataJFK[(weatherdataJFK.shift(periods=1)["temp"] - weatherdataJFK["temp"]) > 0]
 
     #getting the warmest days
     bestDays = weatherdataJFK.sort_values(by=["temp"], ascending=False).head(5)
+
+def pandas_excersise2():
+    return None
 
 def pandas_excersise3():
 
@@ -69,6 +82,3 @@ def pandas_excersise3():
     AsubB = A[~A["Name"].isin(B["Name"])]
     print(AsubB)
 
-
-#pandas_excersise1()
-pandas_excersise3()
