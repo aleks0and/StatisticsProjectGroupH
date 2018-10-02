@@ -1,3 +1,4 @@
+#importing libraries and the function from the exercise file
 import numpy as np
 from numpy_excersises import inner_product, mean_absolute_error, lead, lag, point_pairwise_distance, pairwise_distance
 
