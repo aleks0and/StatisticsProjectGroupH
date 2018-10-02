@@ -7,4 +7,5 @@ Created on Tue Oct  2 13:51:09 2018
 """
 
 def fun(x):
+    #tests for the pandas exercises
     return 0
