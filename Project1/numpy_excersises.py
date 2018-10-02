@@ -31,7 +31,7 @@ def lead(x, n):
 
 def lag(x, n):
     if type(x) == np.ndarray and type(n) == int and len(x) > n:
-        vector = ["Nan"] * n
+        vector = ["NaN"] * n
         return np.append(vector, x[:(len(x)-n)])
     else:
         print("The type of x is not np.array or the type of n is not int")
