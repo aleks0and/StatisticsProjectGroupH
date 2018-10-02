@@ -10,22 +10,16 @@ def inner_product_test():
     assert(ex1 is None)
     # wrong data type
     ex1 = inner_product("A string", np.r_[3, 4])
-    print(ex1)
+    assert(ex1 is None)
     # column Wrong dimentions of the matrix-> doesnt have to be covered
     ex1 = inner_product(np.c_[1, 2], np.r_[3, 4])
-    print(ex1)
+    assert(ex1 is None)
     a1 = np.r_[1, 2, 3, 4]
     a2= np.r_[1, 2, 3, 4]
     ex1 = inner_product(a1, a2)
-    print("our result")
-    print(ex1)
-    print("numpy result")
-    print(np.inner(a1, a2))
+    assert(ex1 == 30)
     ex1 = inner_product(a1.reshape(-1, 1), a2.reshape(-1, 1))
-    print("our result")
-    print(ex1)
-    print("numpy result")
-    print(np.inner(a1, a2))
+    assert(ex1 == 30)
     return  None
 
 #Assignment 1 Numpy ex2 tests:
