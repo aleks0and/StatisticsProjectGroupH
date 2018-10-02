@@ -2,39 +2,46 @@ import numpy as np
 from math import sqrt
 
 
-#Assignment 1 Numpy ex1
+#Assignment 1 Numpy ex1: calculate the inner products between two arrays x and y
 def inner_product(x, y):
+    #x and y must be arrays and their lenght have to be the same
     if type(x) == np.ndarray and type(y) == np.ndarray and len(x) == len(y):
         return (x*y).sum()
     else:
+        #otherwise, tell the user there is a problem
         print("The type of x or y is not np.array or their length is different")
         return None
 
 
-#Assign ment 1 Numpy ex2
+#Assignment 1 Numpy ex2: calculate the mean absolute error between x and y
 def mean_absolute_error(x, y):
+    #x and y must be arrays and their lenght have to be the same
     if type(x) == np.ndarray and type(y) == np.ndarray and len(x) == len(y):
         return (abs(x - y).sum()) / len(x)
     else:
+        #otherwise, tell the user there is a problem
         print("The type of x or y is not np.array or their length is different")
         return None
 
 
 #Assignment 1 Numpy ex3
 def lead(x, n):
+    #x has to be an array and n has to be an integer. 
+    #by construction of the asssignment n should be less than the lenght of x
     if type(x) == np.ndarray and type(n) == int and len(x) > n:
         return np.append(x[n:], ["NaN"] * n)
     else:
+        #tells the user that there is an error in the input
         print("The type of x is not np.array or the type of n is not int or n is bigger than the x's length")
         return None
 
-
-def lag(x, n):
+#this function 
+def lag(x, n): 
     if type(x) == np.ndarray and type(n) == int and len(x) > n:
         vector = ["NaN"] * n
         return np.append(vector, x[:(len(x)-n)])
     else:
-        print("The type of x is not np.array or the type of n is not int")
+        print("The type of x is not np.array or the type of n is not int or n is greater than the lenght of x")
         return None
 
 
