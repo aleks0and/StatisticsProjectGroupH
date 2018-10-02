@@ -25,9 +25,11 @@ def mean_absolute_error(x, y):
 
 
 #Assignment 1 Numpy ex3
-def lead(x, n):
-    #x has to be an array and n has to be an integer. 
-    #by construction of the asssignment n should be less than the lenght of x
+
+#deleting the first n observation from array x and adding n "NaN" at the end of x
+def lead(x, n): 
+    #x has to be a numpy array and n has to be an integer 
+    #n should be less than the lenght of x
     if type(x) == np.ndarray and type(n) == int and len(x) > n:
         return np.append(x[n:], ["NaN"] * n)
     else:
@@ -35,36 +37,44 @@ def lead(x, n):
         print("The type of x is not np.array or the type of n is not int or n is bigger than the x's length")
         return None
 
-#this function 
+#deleting the last n observation from array x and adding n "NaN" at the beginning of x
 def lag(x, n): 
+    #x has to be a numpy array and n has to be an integer 
+    #n should be less than the lenght of x
     if type(x) == np.ndarray and type(n) == int and len(x) > n:
         vector = ["NaN"] * n
         return np.append(vector, x[:(len(x)-n)])
     else:
+        #tells the user that there is an error in the input
         print("The type of x is not np.array or the type of n is not int or n is greater than the lenght of x")
         return None
 
 
-#Assignment 1 Numpy ex4
+#Assignment 1 Numpy ex4: calculate the pairwise distance between points in X and a vector y
+        
+#distance formula
 def point_pairwise_distance(x, y):
+    #x and y are vectors
     if type(x) == np.ndarray and type(y) == np.ndarray:
         return sqrt(((x-y)**2).sum())
+    else:
+        #tells user there is an error in the input
+        print("The type of x or y is not np.array")
+        return None
 
 
 def pairwise_distance(x, y):
-    if type(x) == np.ndarray and type(y) == np.ndarray:
-        if x.shape[1] == y.shape[1]:
+    #checks types of inputs: vectors
+    if type(x) == np.ndarray and type(y) == np.ndarray and x.shape[1] == y.shape[1]:
             d = np.zeros(shape=(1, x.shape[0]))
             for i in range(x.shape[0]):
                 dist = point_pairwise_distance(x[i], y)
                 d[0, i] = dist
             return d
-            #np.apply_along_axis(point_pairwise_distance(,y),) ?? can we apply this function ??
-        else:
-            print("the dimentions of X and y do not match")
-            return None
+            #np.apply_along_axis(point_pairwise_distance(,y),)  can we apply this function?
+    #tells the user there is an error in the input
     else:
-        print("The type of x or y is not np.array")
+        print("The type of x or y is not np.array or the dimentions of X and y do not match")
         return None
 
 
