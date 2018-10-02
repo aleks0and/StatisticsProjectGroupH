@@ -60,8 +60,8 @@ def betweenYearAndDay(dataset):
         dataset_chosen = dataset.loc[:, "year":"day"]
     else:
         dataset_chosen = dataset.loc[:, "day":"year"]
-        
-    print(dataset_chosen)
+
+    return dataset_chosen
 
 def outsideYearAndDay(dataset):
     list_of_columns = dataset.columns.tolist()
@@ -70,32 +70,32 @@ def outsideYearAndDay(dataset):
         dataset_left = dataset.loc[:,:"year"]
         dataset_right = dataset.loc[:,"day":]
         dataset_outside_y_and_d = pd.concat([dataset_left, dataset_right], axis=1)
-        
-        print(dataset_outside_y_and_d)
+        return dataset_outside_y_and_d
         
     else:
         dataset_left = dataset.loc[:,:"day"]
         dataset_right = dataset.loc[:,"year":]
         dataset_outside_y_and_d = pd.concat([dataset_left, dataset_right], axis=1)
-        
-        print(dataset_outside_y_and_d)
+        return dataset_outside_y_and_d
 
 def pandas_excersise2():
     #we specify the path, headers and number of lines to be ommited in the file
-    dataPath = r'C:\Users\Michal\Documents\GitHub\StatisticsProjectGroupH\Project1\data\nycflights13_flights.csv'
+    dataPath = r'./data/nycflights13/nycflights13_flights.csv'
     header = ["year","month","day","dep_time","sched_dep_time","dep_delay","arr_time","sched_arr_time",
               "arr_delay","carrier","flight","tailnum","origin","dest","air_time","distance","hour",
               "minute","time_hour"]
-    skipR = 54
+    skipR = 55
 
     #we are loading the data into python
     flight_data = get_dataframe(dataPath, header, skipR)
     
     #We are selecting only columns between Year and Day columns
-    betweenYearAndDay(flight_data)
-        
+    flightDataInRange = betweenYearAndDay(flight_data)
+    print (flightDataInRange)
+
     #We are selecting only columns that do not lay between Year and Day columns
-    outsideYearAndDay(flight_data)
+    flightDataOutsideRange = outsideYearAndDay(flight_data)
+    print (flightDataOutsideRange)
     
 def pandas_excersise3():
 
@@ -123,3 +123,4 @@ def pandas_excersise3():
     AsubB = A[~A["Name"].isin(B["Name"])]
     print(AsubB)
 
+pandas_excersise2()
