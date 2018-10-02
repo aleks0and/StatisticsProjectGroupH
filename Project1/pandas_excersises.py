@@ -4,7 +4,8 @@ import matplotlib as plt
 #while displaying we want to see all the columns
 pd.set_option('display.max_columns', 100)
 
-def get_dataframe(path,header,skipRows):
+
+def get_dataframe(path, header, skipRows):
     return pd.read_csv(path, sep=",", names=header, skiprows=skipRows)
 
 
@@ -20,6 +21,7 @@ def temperature_conversion(data):
 
 def interpolate_and_mean(data, column):
     data[column].interpolate().mean()
+
 
 #Excersise 1
 def pandas_excersise1():
@@ -53,7 +55,8 @@ def pandas_excersise1():
     #getting the warmest days
     bestDays = weatherdataJFK.sort_values(by=["temp"], ascending=False).head(5)
 
-def betweenYearAndDay(dataset):
+
+def between_year_and_day(dataset):
     list_of_columns = dataset.columns.tolist()
     
     if list_of_columns.index("day") > list_of_columns.index("year"):
@@ -63,7 +66,8 @@ def betweenYearAndDay(dataset):
 
     return dataset_chosen
 
-def outsideYearAndDay(dataset):
+
+def outside_year_and_day(dataset):
     list_of_columns = dataset.columns.tolist()
     
     if list_of_columns.index("day") > list_of_columns.index("year"):
@@ -78,25 +82,27 @@ def outsideYearAndDay(dataset):
         dataset_outside_y_and_d = pd.concat([dataset_left, dataset_right], axis=1)
         return dataset_outside_y_and_d
 
+
 def pandas_excersise2():
     #we specify the path, headers and number of lines to be ommited in the file
     dataPath = r'./data/nycflights13/nycflights13_flights.csv'
-    header = ["year","month","day","dep_time","sched_dep_time","dep_delay","arr_time","sched_arr_time",
-              "arr_delay","carrier","flight","tailnum","origin","dest","air_time","distance","hour",
-              "minute","time_hour"]
+    header = ["year", "month", "day", "dep_time", "sched_dep_time", "dep_delay", "arr_time", "sched_arr_time",
+              "arr_delay", "carrier", "flight", "tailnum", "origin", "dest", "air_time", "distance", "hour",
+              "minute", "time_hour"]
     skipR = 55
 
     #we are loading the data into python
     flight_data = get_dataframe(dataPath, header, skipR)
     
     #We are selecting only columns between Year and Day columns
-    flightDataInRange = betweenYearAndDay(flight_data)
-    print (flightDataInRange)
+    flightDataInRange = between_year_and_day(flight_data)
+    print(flightDataInRange)
 
     #We are selecting only columns that do not lay between Year and Day columns
-    flightDataOutsideRange = outsideYearAndDay(flight_data)
-    print (flightDataOutsideRange)
-    
+    flightDataOutsideRange = outside_year_and_day(flight_data)
+    print(flightDataOutsideRange)
+
+
 def pandas_excersise3():
 
     A = pd.read_csv(r'./data/some_birth_dates1.csv')
