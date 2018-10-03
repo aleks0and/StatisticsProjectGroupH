@@ -17,10 +17,11 @@ def tempConverter(temperature):
 
 def temperature_conversion(data):
     data["temp"] = data["temp"].apply(tempConverter)
+    return data["temp"]
 
 
 def interpolate_and_mean(data, column):
-    data[column].interpolate().mean()
+    return data[column].interpolate().mean()
 
 
 #Excersise 1
@@ -43,8 +44,8 @@ def pandas_excersise1():
     weatherdataJFK = weatherData[weatherData["origin"] == "JFK"]
     #weatherdataJFK["temp"].interpolate().mean()
     interpolate_and_mean(weatherdataJFK, "temp")
+    print("mean temperature of JFK")
     print(weatherdataJFK.head(5))
-
     #ploting the mean temperatures
 
 
@@ -54,7 +55,7 @@ def pandas_excersise1():
 
     #getting the warmest days
     bestDays = weatherdataJFK.sort_values(by=["temp"], ascending=False).head(5)
-
+    return warmDays, bestDays, weatherdataJFK.head(5)
 
 def between_year_and_day(dataset):
     list_of_columns = dataset.columns.tolist()
@@ -101,6 +102,7 @@ def pandas_excersise2():
     #We are selecting only columns that do not lay between Year and Day columns
     flightDataOutsideRange = outside_year_and_day(flight_data)
     print(flightDataOutsideRange)
+    return flightDataInRange, flightDataOutsideRange
 
 
 def pandas_excersise3():
@@ -128,5 +130,7 @@ def pandas_excersise3():
     #A SUBSTRACTED B
     AsubB = A[~A["Name"].isin(B["Name"])]
     print(AsubB)
+    
+    return AnB, AuB, AuBuC, AnC, AsubB
 
 pandas_excersise2()
