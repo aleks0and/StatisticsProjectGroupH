@@ -55,7 +55,7 @@ def pandas_exercise1():
 
     #generating the warmest days
     bestDays = weatherdataJFK.sort_values(by=["temp"], ascending = False).head(5)
-    return warmDays, bestDays, weatherdataJFK.head(5)
+    return warmDays, bestDays, weatherData.head(5), weatherdataJFK.head(5)
 
 def between_year_and_day(dataset):
     list_of_columns = dataset.columns.tolist()
@@ -101,6 +101,7 @@ def pandas_exercise2():
     #We are selecting only columns that do not lay between Year and Day columns
     flightDataOutsideRange = outside_year_and_day(flight_data)
     print(flightDataOutsideRange)
+    
     return flightDataInRange, flightDataOutsideRange
 
 
