@@ -1,6 +1,8 @@
+
 #importing libraries and loading dataset
 import pandas as pd
 import matplotlib as plt
+
 #while displaying we want to see all the columns
 pd.set_option('display.max_columns', 100)
 
@@ -9,7 +11,7 @@ def get_dataframe(path, header, skipRows):
     return pd.read_csv(path, sep=",", names=header, skiprows=skipRows)
 
 
-#converting Kelvins to Celcius
+#converting Kelvin to Celcius
 def tempConverter(temperature):
     temperature = (temperature - 32) * (5.0/9)
     return float(temperature)
@@ -24,9 +26,9 @@ def interpolate_and_mean(data, column):
     return data[column].interpolate().mean()
 
 
-#Excersise 1
-def pandas_excersise1():
-    #we specify the path, headers and number of lines to be ommited in the file
+#Exercise 1
+def pandas_exercise1():
+    #we specify the path, headers and number of lines to be ommitted in the file
     dataPath = r'./data/nycflights13/nycflights13_weather.csv'
     header = ["origin", "year", "month", "day", "hour", "temp", "dewp", "humid", "wind_dir",
                "wind_speed", "wind_gust", "precip", "pressure", "visib", "time_hour"]
@@ -42,19 +44,21 @@ def pandas_excersise1():
 
     #finding the daily mean temperature and interpolating the missing data
     weatherdataJFK = weatherData[weatherData["origin"] == "JFK"]
+    
     #weatherdataJFK["temp"].interpolate().mean()
     interpolate_and_mean(weatherdataJFK, "temp")
     print("mean temperature of JFK")
     print(weatherdataJFK.head(5))
-    #ploting the mean temperatures
+    
+    #plotting the mean temperatures
 
 
 
-    #getting the days with greater mean temperature than the day before
+    #generating the days with greater mean temperature than the day before
     warmDays = weatherdataJFK[(weatherdataJFK.shift(periods=1)["temp"] - weatherdataJFK["temp"]) > 0]
 
-    #getting the warmest days
-    bestDays = weatherdataJFK.sort_values(by=["temp"], ascending=False).head(5)
+    #generating the warmest days
+    bestDays = weatherdataJFK.sort_values(by=["temp"], ascending = False).head(5)
     return warmDays, bestDays, weatherdataJFK.head(5)
 
 def between_year_and_day(dataset):
@@ -84,8 +88,9 @@ def outside_year_and_day(dataset):
         return dataset_outside_y_and_d
 
 
-def pandas_excersise2():
-    #we specify the path, headers and number of lines to be ommited in the file
+#Exercise 2
+def pandas_exercise2():
+    #we specify the path, headers and number of lines to be ommitted in the file
     dataPath = r'./data/nycflights13/nycflights13_flights.csv'
     header = ["year", "month", "day", "dep_time", "sched_dep_time", "dep_delay", "arr_time", "sched_arr_time",
               "arr_delay", "carrier", "flight", "tailnum", "origin", "dest", "air_time", "distance", "hour",
@@ -105,7 +110,8 @@ def pandas_excersise2():
     return flightDataInRange, flightDataOutsideRange
 
 
-def pandas_excersise3():
+#Exercise 3
+def pandas_exercise3():
 
     A = pd.read_csv(r'./data/some_birth_dates1.csv')
     B = pd.read_csv(r'./data/some_birth_dates2.csv')
@@ -133,4 +139,3 @@ def pandas_excersise3():
     
     return AnB, AuB, AuBuC, AnC, AsubB
 
-pandas_excersise2()
