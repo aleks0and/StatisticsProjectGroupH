@@ -49,11 +49,7 @@ def pandas_exercise1():
     interpolate_and_mean(weatherdataJFK, "temp")
     print("mean temperature of JFK")
     print(weatherdataJFK.head(5))
-    
-    #plotting the mean temperatures
-
-
-
+  
     #generating the days with greater mean temperature than the day before
     warmDays = weatherdataJFK[(weatherdataJFK.shift(periods=1)["temp"] - weatherdataJFK["temp"]) > 0]
 
@@ -63,12 +59,10 @@ def pandas_exercise1():
 
 def between_year_and_day(dataset):
     list_of_columns = dataset.columns.tolist()
-    
     if list_of_columns.index("day") > list_of_columns.index("year"):
         dataset_chosen = dataset.loc[:, "year":"day"]
     else:
         dataset_chosen = dataset.loc[:, "day":"year"]
-
     return dataset_chosen
 
 
@@ -138,4 +132,3 @@ def pandas_exercise3():
     print(AsubB)
     
     return AnB, AuB, AuBuC, AnC, AsubB
-
