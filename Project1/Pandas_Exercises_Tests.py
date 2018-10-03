@@ -1,11 +1,7 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Oct  2 13:51:09 2018
+#import library and functions 
+import pandas as pd
+from pandas_excersises import get_dataframe, tempConverter, temperature_conversion, interpolate_and_mean, pandas_excersise1, pandas_excersise2, between_year_and_day, outside_year_and_day, pandas_excersise3
 
-@author: Mac
-"""
-
-def fun(x):
+def exercise1_test(x):
     #tests for the pandas exercises
     return 0
