@@ -2,6 +2,8 @@ from numpy_excersises_tests import inner_product_test, mean_absolute_error_test,
 from pandas_excersises import pandas_exercise1, pandas_exercise2, pandas_exercise3
 
 
+#We thought that as the scope of excersise is to prove that we can use np and pandas libraries as well as how
+#to implement some funcitons by us.
 def main():
 
     print("Numpy section of the assignment notice - below are the results of the tests made on the funcitons")

@@ -2,7 +2,6 @@ import numpy as np
 from math import sqrt
 
 
-#Assignment 1 Numpy ex1: calculate the inner products between two arrays x and y
 def inner_product(x, y):
     #x and y must be arrays and their lenght have to be the same
     if type(x) == np.ndarray and type(y) == np.ndarray and len(x) == len(y):
