@@ -103,7 +103,7 @@ def pairwise_distance_test():
     assert(ex4 == 4.123105625617661)
     # calculating the pairwise distance between multiple points and point y
     ex4 = pairwise_distance(x, y)
-    print(ex4) #I cannot make assert work in this case
+    print(ex4)
     # testing if the function works for X and y dimentions not matching
     ex4 = pairwise_distance(x, w)
     assert(ex4 is None)

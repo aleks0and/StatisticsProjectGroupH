@@ -71,7 +71,6 @@ def pairwise_distance(x, y):
                 dist = point_pairwise_distance(x[i], y)
                 d[0, i] = dist
             return d
-            #np.apply_along_axis(point_pairwise_distance(,y),)  can we apply this function?
     #tells the user there is an error in the input
     else:
         print("The type of x or y is not np.array or the dimentions of X and y do not match")

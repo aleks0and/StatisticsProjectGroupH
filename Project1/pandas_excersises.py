@@ -1,7 +1,7 @@
 
 #importing libraries and loading dataset
 import pandas as pd
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 #while displaying we want to see all the columns
 pd.set_option('display.max_columns', 100)
@@ -49,7 +49,14 @@ def pandas_exercise1():
     interpolate_and_mean(weatherdataJFK, "temp")
     print("mean temperature of JFK")
     print(weatherdataJFK.head(5))
-  
+
+    #plotting the temperatures
+    plt.xlabel('Days')
+    plt.ylabel('Daily mean temperatures')
+    plt.title("Daily mean temperatures for January 2013 at JFK Airport")
+    plt.plot(weatherdataJFK["temp"])
+    plt.show()
+
     #generating the days with greater mean temperature than the day before
     warmDays = weatherdataJFK[(weatherdataJFK.shift(periods=1)["temp"] - weatherdataJFK["temp"]) > 0]
 
@@ -101,8 +108,8 @@ def pandas_exercise2():
     #We are selecting only columns that do not lay between Year and Day columns
     flightDataOutsideRange = outside_year_and_day(flight_data)
     print(flightDataOutsideRange)
-    
-    return flightDataInRange, flightDataOutsideRange
+
+    return None
 
 
 #Exercise 3
@@ -132,4 +139,7 @@ def pandas_exercise3():
     AsubB = A[~A["Name"].isin(B["Name"])]
     print(AsubB)
     
-    return AnB, AuB, AuBuC, AnC, AsubB
+    return None
+
+
+pandas_exercise3()

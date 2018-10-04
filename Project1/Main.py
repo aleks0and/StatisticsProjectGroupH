@@ -4,23 +4,23 @@ from pandas_excersises import pandas_exercise1, pandas_exercise2, pandas_exercis
 
 def main():
 
-    print("Numpy section of the assignment")
+    print("Numpy section of the assignment notice - below are the results of the tests made on the funcitons")
     print("inner product task\n")
     inner_product_test()
-    print("mean absolute error task\n")
+    print("\nmean absolute error task\n")
     mean_absolute_error_test()
-    print("lag and lead task\n")
+    print("\nlag and lead task\n")
     lead_and_lag_test()
-    print("pairwise distance task\n")
+    print("\npairwise distance task\n")
     pairwise_distance_test()
 
     print("\n")
     print("Pandas section of the assignment")
-    print("Pandas excersise 1 using weather data\n")
+    print("\nPandas excersise 1 using weather data\n")
     pandas_exercise1()
-    print("Pandas excersise 1 using flights data\n")
+    print("\nPandas excersise 2 using flights data\n")
     pandas_exercise2()
-    print("Pandas excersise 1 using birthday data\n")
+    print("\nPandas excersise 3 using birthday data\n")
     pandas_exercise3()
     return 0
 
