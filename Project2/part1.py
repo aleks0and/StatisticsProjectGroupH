@@ -1,6 +1,6 @@
 import pandas as pd 
 import numpy as np 
-data = pd.read_csv("/Users/enricaarchetti/Desktop/Uni/DSBA/Statistics/ProbabilityAndStatistics/Assignment_2/wines_properties.csv")
+data = pd.read_csv(r'./data/wines_properties.csv')
 
 ### dropping missing values 
 data.dropna(how = "all", inplace=True)
@@ -35,7 +35,7 @@ top2_eigenvectors = np.hstack( ( eigen_vectors_values[0][1].reshape(2, -1),
 
 #plotting
 import matplotlib.pyplot as plt
-%matplotlib inline
+#%matplotlib inline
 import plotly as py
 py.offline.init_notebook_mode(connected=True)
 
