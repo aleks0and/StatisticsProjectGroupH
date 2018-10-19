@@ -4,4 +4,5 @@
 .Project1/.DS_Store
 .Project1/jupiterNotebooksNotes/.DS_Store
 .Project1/jupiterNotebooksNotes/.ipynb_checkpoints
+*.pyc
 venv/
