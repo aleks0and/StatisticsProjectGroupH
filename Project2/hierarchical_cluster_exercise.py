@@ -39,22 +39,23 @@ pd.set_option('display.max_columns', 20)
 def assignment2_point2():
 
     path = r'./data/wines_properties.csv'
-    wineData = pd.read_csv(path, skiprows=0)
-    clusters = linkage(pdist(wineData, metric='euclidean'), method='complete')
-    headers = list(wineData)
+    wine_data = pd.read_csv(path, skiprows=0)
+    clusters = linkage(pdist(wine_data, metric='euclidean'), method='complete')
+    #headers = list(wine_data)
+    #print(headers)
     labels = ['row label 1', 'row label 2', 'distance', 'no. of items in clust.']
-    print(headers)
-    clustersLabeled = pd.DataFrame(clusters,
-                                   columns=labels,
-                                   index=['cluster %d' % (i + 1) for i in range(clusters.shape[0])]
-                                   )
-    print(clustersLabeled)
+    clusters_labeled = pd.DataFrame(clusters,
+                                    columns=labels,
+                                    index=['cluster %d' % (i + 1) for i in range(clusters.shape[0])]
+                                    )
+    print(clusters_labeled)
     clusterDendogram = dendrogram(clusters)
+    fig = plt.figure()
+
     plt.tight_layout()
     plt.ylabel("Distance ")
     plt.show()
 
     return None
 
-#classes_exercise()
 assignment2_point2()
