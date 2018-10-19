@@ -6,10 +6,12 @@
 #each cluster (the barycenter is an observation) and its variables values.
 #• Using both the information of barycenters and of PCA, give an interpretation to each cluster.
 import pandas as pd
+import numpy as np
 from scipy.spatial.distance import pdist
 from scipy.cluster.hierarchy import linkage
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
+from matplotlib import cm
 pd.set_option('display.max_columns', 20)
 
 
@@ -24,65 +26,24 @@ def assignment2_point3():
     print(wineDataReduced)
     clusters = linkage(pdist(wineData, metric='euclidean'), method='complete')
     headers = list(wineData)
-    KmeansCheck = KMeans(n_clusters=8,
+    NumberOfClusters = 8
+    KmeansCheck = KMeans(n_clusters=NumberOfClusters,
                         init='random')
     wineKmeansCheck = KmeansCheck.fit_predict(wineDataReduced)
-
+    colors = cm.rainbow(np.linspace(0, 1, NumberOfClusters+1))
 
     print(wineKmeansCheck)
     print(wineDataReducedasMatrix[:,0])
-
-    plt.scatter(wineDataReducedasMatrix[wineKmeansCheck == 0, 0],
-                wineDataReducedasMatrix[wineKmeansCheck == 0, 1],
-                s=50, c='lightgreen',
-                marker='s', edgecolor='black',
-                label='cluster 1')
-    # cluster 2
-    plt.scatter(wineDataReducedasMatrix[wineKmeansCheck == 1, 0],
-                wineDataReducedasMatrix[wineKmeansCheck == 1, 1],
-                s=50, c='orange',
-                marker='o', edgecolor='black',
-                label='cluster 2')
-    # cluster 3
-    plt.scatter(wineDataReducedasMatrix[wineKmeansCheck == 2, 0],
-                wineDataReducedasMatrix[wineKmeansCheck == 2, 1],
-                s=50, c='lightblue',
-                marker='v', edgecolor='black',
-                label='cluster 3')
-    # cluster 4
-    plt.scatter(wineDataReducedasMatrix[wineKmeansCheck == 3, 0],
-                wineDataReducedasMatrix[wineKmeansCheck == 3, 1],
-                s=50, c='red',
-                marker='v', edgecolor='black',
-                label='cluster 4')
-    # cluster 5
-    plt.scatter(wineDataReducedasMatrix[wineKmeansCheck == 4, 0],
-                wineDataReducedasMatrix[wineKmeansCheck == 4, 1],
-                s=50, c='yellow',
-                marker='v', edgecolor='black',
-                label='cluster 5')
-    # cluster 6
-    plt.scatter(wineDataReducedasMatrix[wineKmeansCheck == 5, 0],
-                wineDataReducedasMatrix[wineKmeansCheck == 5, 1],
-                s=50, c='brown',
-                marker='v', edgecolor='black',
-                label='cluster 6')
-    # cluster 7
-    plt.scatter(wineDataReducedasMatrix[wineKmeansCheck == 6, 0],
-                wineDataReducedasMatrix[wineKmeansCheck == 6, 1],
-                s=50, c='purple',
-                marker='v', edgecolor='black',
-                label='cluster 7')
-    # cluster 8
-    plt.scatter(wineDataReducedasMatrix[wineKmeansCheck == 7, 0],
-                wineDataReducedasMatrix[wineKmeansCheck == 7, 1],
-                s=50, c='fuchsia',
-                marker='v', edgecolor='black',
-                label='cluster 8')
+    for i in range(0,NumberOfClusters):
+        plt.scatter(wineDataReducedasMatrix[wineKmeansCheck == i, 0],
+                    wineDataReducedasMatrix[wineKmeansCheck == i, 1],
+                    s=50, c=colors[i],
+                    marker='o', edgecolor='black',
+                    label='cluster %d' % (i+1))
     plt.scatter(KmeansCheck.cluster_centers_[:, 0],
                 KmeansCheck.cluster_centers_[:, 1],
                 s=250, marker='*',
-                c='red', edgecolor='black',
+                c=colors[NumberOfClusters], edgecolor='black',
                 label='centroids')
     plt.legend(scatterpoints=1)
     plt.grid()
