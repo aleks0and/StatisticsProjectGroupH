@@ -78,9 +78,10 @@ def assignment2_point3():
 
 def best_k_for_kmeans():
     path = r'./data/wines_properties.csv'
-    wine_data = pd.read_csv(path, skiprows=0)
+    wine_data = prepare_and_load_data(path,skiprows=0)
     # hardcoded column names to be changed for the PCI analysis
     first_two_principal_components = pca_top2_extraction(wine_data)
+    print(first_two_principal_components)
     wine_data_reduced = wine_data.values.dot(first_two_principal_components)
     wine_data_reduced_matrix = wine_data_reduced
     #check with pca
