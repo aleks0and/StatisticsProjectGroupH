@@ -35,7 +35,6 @@ top2_eigenvectors = np.hstack( ( eigen_vectors_values[0][1].reshape(2, -1),
 
 #plotting
 import matplotlib.pyplot as plt
-%matplotlib inline
 import plotly as py
 py.offline.init_notebook_mode(connected=True)
 
