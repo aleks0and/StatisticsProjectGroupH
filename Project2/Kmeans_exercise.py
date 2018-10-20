@@ -55,9 +55,9 @@ def assignment2_point3():
     wine_data = prepare_and_load_data(path, skiprows=0)
     # PCA missing
 
-    # naive attempt
+    # naive attempt w/ generated 
 
-    wine_data_reduced = wine_data.loc[:, ['Alcohol', 'Ash']]
+    wine_data_reduced = wine_data.loc[:, ['Alcohol', 'Malic_Acid']]
     wine_data_reduced_matrix = quantify_data(wine_data_reduced, False)
     print(wine_data_reduced)
     headers = list(wine_data)
@@ -68,6 +68,30 @@ def assignment2_point3():
     wine_predicted_clusters = kmeans_init.fit_predict(wine_data_reduced)
     plot_clusters(wine_data_reduced_matrix, wine_predicted_clusters, kmeans_init, number_of_clusters)
     return None
+
+
+#only for top2 eigenvalues Alcohol and Malic_Acid
+def assignment2_point3_top2_eigenvalues():
+    path = r'./data/wines_properties.csv'
+    wine_data = prepare_and_load_data(path, skiprows=0)
+    # PCA missing
+
+    # naive attempt w/ generated 
+
+    wine_data_reduced = wine_data.loc[:, ['Alcohol', 'Malic_Acid']]
+    wine_data_reduced_matrix = quantify_data(wine_data_reduced, False)
+    print(wine_data_reduced)
+    headers = list(wine_data)
+    print(headers)
+    number_of_clusters = 4
+    kmeans_init = KMeans(n_clusters=number_of_clusters,
+                         init='random')
+    wine_predicted_clusters = kmeans_init.fit_predict(wine_data_reduced)
+    plot_clusters(wine_data_reduced_matrix, wine_predicted_clusters, kmeans_init, number_of_clusters)
+    print("plotted assignment2_point3")
+    return None
+
+assignment2_point3_top2_eigenvalues()
 
 
 # assignment2_point3()
@@ -116,3 +140,4 @@ def best_k_for_kmeans():
 
 #assignment2_point3()
 best_k_for_kmeans()
+
