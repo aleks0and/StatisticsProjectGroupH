@@ -21,7 +21,7 @@ def quantify_data(data, standardization):
 
 
 def pca_top2_extraction(data):
-    x_s = quantify_data(data, True)  
+    x_s = quantify_data(data, True)
     names = list(data)
     corelation_matrix = np.corrcoef(x_s.T)
     eigen_values, eigen_vectors = np.linalg.eig(corelation_matrix)
