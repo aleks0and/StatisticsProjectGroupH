@@ -78,6 +78,7 @@ def assignment2_point2_specified():
                                     columns=labels,
                                     index=['cluster %d' % (i + 1) for i in range(clusters.shape[0])]
                                     )
+<<<<<<< HEAD
     #print(clusters_labeled)
     clusterDendogram = dendrogram(clusters,
                                   color_threshold=3.8,
@@ -92,10 +93,18 @@ def assignment2_point2_specified():
                          textcoords='offset points',
                          va='top', ha='center')
     fig = plt.figure()
+=======
+    print(clusters_labeled)
+    clusterDendogram = dendrogram(clusters)
+>>>>>>> d602a5dd9f4376bad1f415bd379de451bb1d6964
 
     plt.tight_layout()
     #plt.ylabel("Dist")
     plt.show()
     return None
 
+<<<<<<< HEAD
 assignment2_point2_specified ()
+=======
+#assignment2_point2()
+>>>>>>> d602a5dd9f4376bad1f415bd379de451bb1d6964
