@@ -54,8 +54,8 @@ def principal_components_comparison():
         plt.title('%d' %i)
         plt.grid(True)
         compared_eigenvectors = np.hstack((eigen_vectors_values[0][1].reshape(len(eigen_values), 1),
-                                   eigen_vectors_values[i][1].reshape(len(eigen_values), 1)
-                                   ))
+                                           eigen_vectors_values[i][1].reshape(len(eigen_values), 1)
+                                           ))
         plt.quiver(np.zeros(compared_eigenvectors.shape[1]), np.zeros(compared_eigenvectors.shape[1]),
                    compared_eigenvectors[0,], compared_eigenvectors[1, :],
                    angles='xy', scale_units='xy', scale=1, color=colors)
