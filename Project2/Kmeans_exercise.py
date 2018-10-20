@@ -37,7 +37,6 @@ def plot_clusters(data, predicted_clusters, initialized_kmeans, number_of_cluste
     plt.tight_layout()
     plt.show()
 
-
 # loading data and omiting specified number of rows, also dropping the rows with missing values.
 def prepare_and_load_data(path, skip_rows):
     data = pd.read_csv(path, skiprows=skip_rows)
@@ -57,10 +56,9 @@ def assignment2_point3():
     wine_data = prepare_and_load_data(path, skiprows=0)
     # PCA missing
 
-    # Silhouette plotting
+    # naive attempt w/ generated 
 
-    # naive attempt
-    wine_data_reduced = wine_data.loc[:, ['Alcohol', 'Ash']]
+    wine_data_reduced = wine_data.loc[:, ['Alcohol', 'Malic_Acid']]
     wine_data_reduced_matrix = quantify_data(wine_data_reduced, False)
     print(wine_data_reduced)
     headers = list(wine_data)
@@ -71,6 +69,31 @@ def assignment2_point3():
     wine_predicted_clusters = kmeans_init.fit_predict(wine_data_reduced)
     plot_clusters(wine_data_reduced_matrix, wine_predicted_clusters, kmeans_init, number_of_clusters)
     return None
+
+
+#only for top2 eigenvalues Alcohol and Malic_Acid
+def assignment2_point3_top2_eigenvalues():
+    path = r'./data/wines_properties.csv'
+    wine_data = prepare_and_load_data(path, skiprows=0)
+    # PCA missing
+
+    # naive attempt w/ generated 
+
+    wine_data_reduced = wine_data.loc[:, ['Alcohol', 'Malic_Acid']]
+    wine_data_reduced_matrix = quantify_data(wine_data_reduced, False)
+    print(wine_data_reduced)
+    headers = list(wine_data)
+    print(headers)
+    number_of_clusters = 4
+    kmeans_init = KMeans(n_clusters=number_of_clusters,
+                         init='random')
+    wine_predicted_clusters = kmeans_init.fit_predict(wine_data_reduced)
+    plot_clusters(wine_data_reduced_matrix, wine_predicted_clusters, kmeans_init, number_of_clusters)
+    print("plotted assignment2_point3")
+    return None
+
+assignment2_point3_top2_eigenvalues()
+
 
 # assignment2_point3()
 # Exercise 4
@@ -87,11 +110,11 @@ def best_k_for_kmeans():
     wine_data_reduced = quantify_data(wine_data, True).dot(first_two_principal_components)
     wine_data_reduced_matrix = wine_data_reduced
     # check with pca
-    # sklearn_pca = PCA(n_components=2)
-    # wine_data_standardized = quantify_data(wine_data,True)
-    # Y_sklearn = sklearn_pca.fit_transform(wine_data_standardized)
-    # # preimplemented part
-    # wine_data_reduced_matrix = Y_sklearn
+    #sklearn_pca = PCA(n_components=2)
+    #wine_data_standardized = quantify_data(wine_data,True)
+    #Y_sklearn = sklearn_pca.fit_transform(wine_data_standardized)
+    # preimplemented part
+    #wine_data_reduced_matrix = Y_sklearn
     # range of clusters is now hardcoded but we can get it from hierarchical cluster analysis
     min_cluster = 2
     max_cluster = 11

@@ -4,16 +4,17 @@ import matplotlib.pyplot as plt
 import plotly as py
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
+#%matplotlib inline
 
 
-def prepare_and_load_data(path, skip_rows):
-    data = pd.read_csv(path, skiprows=skip_rows)
+def prepare_and_load_data(path,skiprows):
+    data = pd.read_csv(path,skiprows=skiprows)
     data.dropna(how="all", inplace=True)
     return data
 
 
-def quantify_data(dataset, standardization):
-    result = dataset.values
+def quantify_data(data, standardization):
+    result = data.values
     if standardization:
         result = StandardScaler().fit_transform(result)
     return result
@@ -48,18 +49,12 @@ def pca_exercise():
                                    ))
 
     py.offline.init_notebook_mode(connected=True)
-    # TESTING
-    # plotting all of the components
-    # pca_maker = PCA(n_components=2)
-    # pca = pca_maker.fit_transform(x_s)
-    # PCs = pca_maker.components_
-    # for plotting only the two most important ones
-    # PCs = PCA().fit(x_s).components_
-    # PCs = pca_top2_extraction(data)
-    PCs = eigen_vectors
-    # PCs = top2_eigenvectors
 
-    plt.figure(figsize=(5, 5))
+    # Get the PCA components (loadings)
+    PCs = eigen_vectors
+
+    # Use quiver to generate the basic plot
+    fig = plt.figure(figsize=(5, 5))
     plt.quiver(np.zeros(PCs.shape[1]), np.zeros(PCs.shape[1]),
                PCs[0, ], PCs[1, :],
                angles='xy', scale_units='xy', scale=1)
@@ -84,5 +79,30 @@ def pca_exercise():
 
 
 
+#pca_exercise()
 
-pca_exercise()
+
+def pca_top2_extraction(data):
+    x_s = quantify_data(data, True)  
+    
+    names = ["Alcohol","Malic_Acid","Ash","Ash_Alcanity",
+                             "Magnesium","Total_Phenols","Flavanoids",
+                             "Nonflavanoid_Phenols","Proanthocyanins",
+                             "Color_Intensity","Hue","OD280","Proline",
+                             "Customer_Segment"]
+    
+    corelation_matrix = np.corrcoef(x_s.T)
+    eigen_values, eigen_vectors = np.linalg.eig(corelation_matrix)
+    eigen_pairs = [(np.abs(eigen_values[i]), eigen_vectors[:, i], names[i]) for i in range(len(eigen_values))]
+    eigen_unsorted = eigen_pairs
+    print(eigen_pairs, eigen_unsorted)
+    eigen_pairs.sort()
+    eigen_pairs.reverse()
+    top2_eigenvectors = np.hstack((eigen_pairs[0][1].reshape(len(eigen_values), 1),
+                                   eigen_pairs[1][1].reshape(len(eigen_values), 1)))
+    
+    top2_withnames = pd.DataFrame(top2_eigenvectors, columns = [eigen_pairs[0][2],eigen_pairs[1][2]])
+    
+    return top2_withnames
+
+pca_top2_extraction()
