@@ -6,7 +6,6 @@
 #each cluster (the barycenter is an observation) and its variables values.
 #• Using both the information of barycenters and of PCA, give an interpretation to each cluster.
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
@@ -14,7 +13,6 @@ from sklearn.preprocessing import StandardScaler
 from matplotlib import cm
 from PCA_exercise import pca_top2_extraction
 from sklearn.decomposition import PCA
-from sklearn.metrics import silhouette_samples
 pd.set_option('display.max_columns', 20)
 
 
@@ -38,8 +36,9 @@ def plot_clusters(data, predicted_clusters, initialized_kmeans, number_of_cluste
     plt.show()
 
 # loading data and omiting specified number of rows, also dropping the rows with missing values.
-def prepare_and_load_data(path, skip_rows):
-    data = pd.read_csv(path, skiprows=skip_rows)
+def prepare_and_load_data(path,skiprows):
+
+    data = pd.read_csv(path,skiprows=skiprows)
     data.dropna(how="all", inplace=True)
     return data
 
@@ -103,7 +102,7 @@ assignment2_point3_top2_eigenvalues()
 
 def best_k_for_kmeans():
     path = r'./data/wines_properties.csv'
-    wine_data = prepare_and_load_data(path, skip_rows=0)
+    wine_data = prepare_and_load_data(path,skiprows=0)
     # hardcoded column names to be changed for the PCI analysis
     first_two_principal_components = pca_top2_extraction(wine_data)
     print(first_two_principal_components)
@@ -139,47 +138,6 @@ def best_k_for_kmeans():
     plot_clusters(wine_data_reduced_matrix, predicted_clusters, kmeans_setup, last_best_cluster_index)
     return last_best_cluster_index
 
-def silhouette():
-    path = r'./data/wines_properties.csv'
-    wine_data = prepare_and_load_data(path, skip_rows=0)
-    km = KMeans(n_clusters=2, 
-            init='k-means++', 
-            n_init=10, 
-            max_iter=300,
-            tol=1e-04,
-            random_state=0)
-    y_km = km.fit_predict(wine_data)
-
-    cluster_labels = np.unique(y_km)
-    cluster_labels
-    n_clusters = cluster_labels.shape[0]
-
-    silhouette_vals = silhouette_samples(wine_data, y_km, metric='euclidean')
-
-    y_ax_lower, y_ax_upper = 0, 0
-    yticks = []
-    
-    for i, c in enumerate(cluster_labels):
-        c_silhouette_vals = silhouette_vals[y_km == c]
-        c_silhouette_vals.sort()
-        y_ax_upper += len(c_silhouette_vals)
-        color = cm.jet(float(i) / n_clusters)
-        plt.barh(range(y_ax_lower, y_ax_upper), c_silhouette_vals, height=1.0, 
-                 edgecolor='none', color=color)
-
-        yticks.append((y_ax_lower + y_ax_upper) / 2.)
-        y_ax_lower += len(c_silhouette_vals)
-    
-    silhouette_avg = np.mean(silhouette_vals)
-    plt.axvline(silhouette_avg, color="red", linestyle="--") 
-
-    plt.yticks(yticks, cluster_labels + 1)
-    plt.ylabel('Cluster')
-    plt.xlabel('Silhouette coefficient')
-
-    plt.tight_layout()
-    plt.show()
-
 #assignment2_point3()
-#best_k_for_kmeans()
-#silhouette()
+best_k_for_kmeans()
+
