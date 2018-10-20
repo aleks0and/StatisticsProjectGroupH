@@ -5,6 +5,7 @@ from scipy.spatial.distance import pdist,squareform
 from scipy.cluster.hierarchy import linkage
 from scipy.cluster.hierarchy import dendrogram
 import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
 pd.set_option('display.max_columns', 20)
 
 # REFERENCE POINT FROM CLASS EXERCISES
@@ -36,31 +37,35 @@ pd.set_option('display.max_columns', 20)
 #
 #     return None
 
- =============================================================================
- def assignment2_point2():
+def quantify_data(data, standardization):
+    result = data.values
+    if standardization:
+        result = StandardScaler().fit_transform(result)
+    return result
+
+
+
+def assignment2_point2():
  
-     path = r'./data/wines_properties.csv'
-     wine_data = pd.read_csv(path, skiprows=0)
-     clusters = linkage(pdist(wine_data, metric='euclidean'), method='complete')
-     #headers = list(wine_data)
-     #print(headers)
-     labels = ['row label 1', 'row label 2', 'distance', 'no. of items in clust.']
-     clusters_labeled = pd.DataFrame(clusters,
-                                     columns=labels,
-                                     index=['cluster %d' % (i + 1) for i in range(clusters.shape[0])]
-                                     )
-     print(clusters_labeled)
-     clusterDendogram = dendrogram(clusters)
-     fig = plt.figure()
- 
-     plt.tight_layout()
-     plt.ylabel("Dist")
-     plt.show()
- 
-     return None
- 
- assignment2_point2()
- =============================================================================
+    path = r'./data/wines_properties.csv'
+    wine_data = pd.read_csv(path, skiprows=0)
+    clusters = linkage(pdist(wine_data, metric='euclidean'), method='complete')
+    #headers = list(wine_data)
+    #print(headers)
+    labels = ['row label 1', 'row label 2', 'distance', 'no. of items in clust.']
+    clusters_labeled = pd.DataFrame(clusters,
+                                 columns=labels,
+                                 index=['cluster %d' % (i + 1) for i in range(clusters.shape[0])]
+                                 )
+    print(clusters_labeled)
+    clusterDendogram = dendrogram(clusters)
+    fig = plt.figure()
+
+    plt.tight_layout()
+    plt.ylabel("Dist")
+    plt.show()
+
+    return None
 
 
 # with specified PCA Factors Alcohol and Malic_Acid 
@@ -78,7 +83,6 @@ def assignment2_point2_specified():
                                     columns=labels,
                                     index=['cluster %d' % (i + 1) for i in range(clusters.shape[0])]
                                     )
-<<<<<<< HEAD
     #print(clusters_labeled)
     clusterDendogram = dendrogram(clusters,
                                   color_threshold=3.8,
@@ -93,18 +97,15 @@ def assignment2_point2_specified():
                          textcoords='offset points',
                          va='top', ha='center')
     fig = plt.figure()
-=======
     print(clusters_labeled)
     clusterDendogram = dendrogram(clusters)
->>>>>>> d602a5dd9f4376bad1f415bd379de451bb1d6964
 
     plt.tight_layout()
     #plt.ylabel("Dist")
     plt.show()
     return None
 
-<<<<<<< HEAD
 assignment2_point2_specified ()
-=======
+
 #assignment2_point2()
->>>>>>> d602a5dd9f4376bad1f415bd379de451bb1d6964
+
