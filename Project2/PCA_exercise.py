@@ -56,8 +56,8 @@ def pca_exercise():
     # for plotting only the two most important ones
     # PCs = PCA().fit(x_s).components_
     # PCs = pca_top2_extraction(data)
-    # PCs = eigen_vectors
-    PCs = top2_eigenvectors
+    PCs = eigen_vectors
+    # PCs = top2_eigenvectors
 
     plt.figure(figsize=(5, 5))
     plt.quiver(np.zeros(PCs.shape[1]), np.zeros(PCs.shape[1]),
