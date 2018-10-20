@@ -37,10 +37,10 @@ def plot_clusters(data, predicted_clusters, initialized_kmeans, number_of_cluste
     plt.tight_layout()
     plt.show()
 
-# loading data and omiting specified number of rows, also dropping the rows with missing values.
-def prepare_and_load_data(path,skiprows):
 
-    data = pd.read_csv(path,skiprows=skiprows)
+# loading data and omiting specified number of rows, also dropping the rows with missing values.
+def prepare_and_load_data(path, skip_rows):
+    data = pd.read_csv(path, skiprows=skip_rows)
     data.dropna(how="all", inplace=True)
     return data
 
@@ -57,12 +57,9 @@ def assignment2_point3():
     wine_data = prepare_and_load_data(path, skiprows=0)
     # PCA missing
 
-
     # Silhouette plotting
 
-
     # naive attempt
-
     wine_data_reduced = wine_data.loc[:, ['Alcohol', 'Ash']]
     wine_data_reduced_matrix = quantify_data(wine_data_reduced, False)
     print(wine_data_reduced)
@@ -75,7 +72,6 @@ def assignment2_point3():
     plot_clusters(wine_data_reduced_matrix, wine_predicted_clusters, kmeans_init, number_of_clusters)
     return None
 
-
 # assignment2_point3()
 # Exercise 4
 # based on http://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_silhouette_analysis.html
@@ -84,18 +80,18 @@ def assignment2_point3():
 
 def best_k_for_kmeans():
     path = r'./data/wines_properties.csv'
-    wine_data = prepare_and_load_data(path,skiprows=0)
+    wine_data = prepare_and_load_data(path, skip_rows=0)
     # hardcoded column names to be changed for the PCI analysis
     first_two_principal_components = pca_top2_extraction(wine_data)
     print(first_two_principal_components)
     wine_data_reduced = quantify_data(wine_data, True).dot(first_two_principal_components)
     wine_data_reduced_matrix = wine_data_reduced
     # check with pca
-    #sklearn_pca = PCA(n_components=2)
-    #wine_data_standardized = quantify_data(wine_data,True)
-    #Y_sklearn = sklearn_pca.fit_transform(wine_data_standardized)
-    # preimplemented part
-    #wine_data_reduced_matrix = Y_sklearn
+    # sklearn_pca = PCA(n_components=2)
+    # wine_data_standardized = quantify_data(wine_data,True)
+    # Y_sklearn = sklearn_pca.fit_transform(wine_data_standardized)
+    # # preimplemented part
+    # wine_data_reduced_matrix = Y_sklearn
     # range of clusters is now hardcoded but we can get it from hierarchical cluster analysis
     min_cluster = 2
     max_cluster = 11
@@ -122,7 +118,7 @@ def best_k_for_kmeans():
 
 def silhouette():
     path = r'./data/wines_properties.csv'
-    wine_data = prepare_and_load_data(path, skiprows=0)
+    wine_data = prepare_and_load_data(path, skip_rows=0)
     km = KMeans(n_clusters=2, 
             init='k-means++', 
             n_init=10, 
@@ -130,7 +126,6 @@ def silhouette():
             tol=1e-04,
             random_state=0)
     y_km = km.fit_predict(wine_data)
-
 
     cluster_labels = np.unique(y_km)
     cluster_labels
@@ -162,6 +157,6 @@ def silhouette():
     plt.tight_layout()
     plt.show()
 
-assignment2_point3()
-best_k_for_kmeans()
-silhouette()
+#assignment2_point3()
+#best_k_for_kmeans()
+#silhouette()

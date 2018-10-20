@@ -50,7 +50,6 @@ def assignment2_point2():
                                     )
     print(clusters_labeled)
     clusterDendogram = dendrogram(clusters)
-    fig = plt.figure()
 
     plt.tight_layout()
     plt.ylabel("Dist")
@@ -58,4 +57,4 @@ def assignment2_point2():
 
     return None
 
-assignment2_point2()
+#assignment2_point2()
