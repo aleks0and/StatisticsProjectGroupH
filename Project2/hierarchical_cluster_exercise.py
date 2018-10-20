@@ -54,7 +54,6 @@ def assignment2_point2():
     plt.tight_layout()
     plt.ylabel("Dist")
     plt.show()
-
     return None
 
 #assignment2_point2()
