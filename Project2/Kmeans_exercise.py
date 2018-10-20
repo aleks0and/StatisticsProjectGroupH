@@ -85,9 +85,9 @@ def best_k_for_kmeans():
     wine_data_reduced = quantify_data(wine_data, True).dot(first_two_principal_components)
     wine_data_reduced_matrix = wine_data_reduced
     # check with pca
-    sklearn_pca = PCA(n_components=2)
-    wine_data_standardized = quantify_data(wine_data,True)
-    Y_sklearn = sklearn_pca.fit_transform(wine_data_standardized)
+    #sklearn_pca = PCA(n_components=2)
+    #wine_data_standardized = quantify_data(wine_data,True)
+    #Y_sklearn = sklearn_pca.fit_transform(wine_data_standardized)
     # preimplemented part
     #wine_data_reduced_matrix = Y_sklearn
     # range of clusters is now hardcoded but we can get it from hierarchical cluster analysis
