@@ -82,13 +82,14 @@ def best_k_for_kmeans():
     # hardcoded column names to be changed for the PCI analysis
     first_two_principal_components = pca_top2_extraction(wine_data)
     print(first_two_principal_components)
-    wine_data_reduced = wine_data.values.dot(first_two_principal_components)
+    wine_data_reduced = quantify_data(wine_data, True).dot(first_two_principal_components)
     wine_data_reduced_matrix = wine_data_reduced
-    #check with pca
+    # check with pca
     sklearn_pca = PCA(n_components=2)
     wine_data_standardized = quantify_data(wine_data,True)
     Y_sklearn = sklearn_pca.fit_transform(wine_data_standardized)
-    wine_data_reduced_matrix = Y_sklearn
+    # preimplemented part
+    #wine_data_reduced_matrix = Y_sklearn
     # range of clusters is now hardcoded but we can get it from hierarchical cluster analysis
     min_cluster = 2
     max_cluster = 11
@@ -96,7 +97,6 @@ def best_k_for_kmeans():
     last_best_silhouette_avg = -1
     last_best_cluster_index = 0
     range_cluster = [i for i in range(min_cluster, max_cluster)]
-
     for clusterI in range_cluster:
         kmeans_setup = KMeans(n_clusters=clusterI, random_state=10)
         predicted_clusters = kmeans_setup.fit_predict(wine_data_reduced_matrix)
