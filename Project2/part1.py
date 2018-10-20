@@ -1,6 +1,6 @@
 import pandas as pd 
 import numpy as np 
-data = pd.read_csv("/Users/enricaarchetti/Desktop/Uni/DSBA/Statistics/ProbabilityAndStatistics/Assignment_2/wines_properties.csv")
+data = pd.read_csv(r"C:\Users\Michal\Documents\GitHub\StatisticsProjectGroupH\Project2\data\wines_properties.csv")
 
 ### dropping missing values 
 data.dropna(how = "all", inplace=True)

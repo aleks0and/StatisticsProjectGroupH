@@ -53,7 +53,7 @@ def assignment2_point2():
     fig = plt.figure()
 
     plt.tight_layout()
-    plt.ylabel("Distance ")
+    plt.ylabel("Dist")
     plt.show()
 
     return None
