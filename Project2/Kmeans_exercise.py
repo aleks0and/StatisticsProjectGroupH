@@ -6,7 +6,6 @@
 #each cluster (the barycenter is an observation) and its variables values.
 #• Using both the information of barycenters and of PCA, give an interpretation to each cluster.
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
@@ -14,8 +13,11 @@ from sklearn.preprocessing import StandardScaler
 from matplotlib import cm
 from PCA_exercise import pca_top2_extraction
 from sklearn.decomposition import PCA
+<<<<<<< HEAD
 from sklearn.metrics import silhouette_samples
 from PCA_exercise import quantify_data
+=======
+>>>>>>> 13ff4771733e8761e05cebf5da923eed35e50bc0
 pd.set_option('display.max_columns', 20)
 
 
@@ -58,10 +60,12 @@ def assignment2_point3():
     wine_data = prepare_and_load_data(path, skiprows=0)
     # PCA missing
 
+<<<<<<< HEAD
     # Silhouette plotting
 
 
     # naive attempt
+=======
     # naive attempt w/ generated 
 
     wine_data_reduced = wine_data.loc[:, ['Alcohol', 'Malic_Acid']]
@@ -75,6 +79,31 @@ def assignment2_point3():
     wine_predicted_clusters = kmeans_init.fit_predict(wine_data_reduced)
     plot_clusters(wine_data_reduced_matrix, wine_predicted_clusters, kmeans_init, number_of_clusters)
     return None
+
+
+#only for top2 eigenvalues Alcohol and Malic_Acid
+def assignment2_point3_top2_eigenvalues():
+    path = r'./data/wines_properties.csv'
+    wine_data = prepare_and_load_data(path, skiprows=0)
+    # PCA missing
+
+>>>>>>> 13ff4771733e8761e05cebf5da923eed35e50bc0
+    # naive attempt w/ generated 
+
+    wine_data_reduced = wine_data.loc[:, ['Alcohol', 'Malic_Acid']]
+    wine_data_reduced_matrix = quantify_data(wine_data_reduced, False)
+    print(wine_data_reduced)
+    headers = list(wine_data)
+    print(headers)
+    number_of_clusters = 4
+    kmeans_init = KMeans(n_clusters=number_of_clusters,
+                         init='random')
+    wine_predicted_clusters = kmeans_init.fit_predict(wine_data_reduced)
+    plot_clusters(wine_data_reduced_matrix, wine_predicted_clusters, kmeans_init, number_of_clusters)
+    print("plotted assignment2_point3")
+    return None
+
+assignment2_point3_top2_eigenvalues()
 
 
 def silhouette():
@@ -224,8 +253,14 @@ def best_k_for_kmeans():
     plot_clusters(wine_data_reduced_matrix, predicted_clusters, kmeans_setup, last_best_cluster_index)
     return last_best_cluster_index
 
+<<<<<<< HEAD
 assignment2_point3_top2_eigenvalues()
 best_k_for_kmeans()
 
 silhouette()
 original_vars_PCA()
+=======
+#assignment2_point3()
+best_k_for_kmeans()
+
+>>>>>>> 13ff4771733e8761e05cebf5da923eed35e50bc0

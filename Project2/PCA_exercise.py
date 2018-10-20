@@ -21,8 +21,19 @@ def quantify_data(data, standardization):
 
 
 def pca_top2_extraction(data):
+<<<<<<< HEAD
     x_s = quantify_data(data, True)
     names = list(data)
+=======
+    x_s = quantify_data(data, True)  
+    
+    names = ["Alcohol","Malic_Acid","Ash","Ash_Alcanity",
+                             "Magnesium","Total_Phenols","Flavanoids",
+                             "Nonflavanoid_Phenols","Proanthocyanins",
+                             "Color_Intensity","Hue","OD280","Proline",
+                             "Customer_Segment"]
+    
+>>>>>>> 13ff4771733e8761e05cebf5da923eed35e50bc0
     corelation_matrix = np.corrcoef(x_s.T)
     eigen_values, eigen_vectors = np.linalg.eig(corelation_matrix)
     eigen_pairs = [(np.abs(eigen_values[i]), eigen_vectors[:, i], names[i]) for i in range(len(eigen_values))]
@@ -112,3 +123,29 @@ b = type(a)
 
 
 #pca_exercise()
+
+
+def pca_top2_extraction(data):
+    x_s = quantify_data(data, True)  
+    
+    names = ["Alcohol","Malic_Acid","Ash","Ash_Alcanity",
+                             "Magnesium","Total_Phenols","Flavanoids",
+                             "Nonflavanoid_Phenols","Proanthocyanins",
+                             "Color_Intensity","Hue","OD280","Proline",
+                             "Customer_Segment"]
+    
+    corelation_matrix = np.corrcoef(x_s.T)
+    eigen_values, eigen_vectors = np.linalg.eig(corelation_matrix)
+    eigen_pairs = [(np.abs(eigen_values[i]), eigen_vectors[:, i], names[i]) for i in range(len(eigen_values))]
+    eigen_unsorted = eigen_pairs
+    print(eigen_pairs, eigen_unsorted)
+    eigen_pairs.sort()
+    eigen_pairs.reverse()
+    top2_eigenvectors = np.hstack((eigen_pairs[0][1].reshape(len(eigen_values), 1),
+                                   eigen_pairs[1][1].reshape(len(eigen_values), 1)))
+    
+    top2_withnames = pd.DataFrame(top2_eigenvectors, columns = [eigen_pairs[0][2],eigen_pairs[1][2]])
+    
+    return top2_withnames
+
+pca_top2_extraction()
