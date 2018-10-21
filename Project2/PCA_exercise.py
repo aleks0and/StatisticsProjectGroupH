@@ -36,7 +36,7 @@ def pca_top2_extraction(data):
 
 def pca_exercise():
     path = r'./data/wines_properties.csv'
-    data = prepare_and_load_data(path,skip_rows=0)
+    data = prepare_and_load_data(path,skiprows=0)
     x_s = quantify_data(data, True)
     covariance_matrix = np.cov(x_s.T)
     eigen_values, eigen_vectors = np.linalg.eig(covariance_matrix)
@@ -51,7 +51,7 @@ def pca_exercise():
     py.offline.init_notebook_mode(connected=True)
 
     # Get the PCA components (loadings)
-    PCs = eigen_vectors
+    PCs = top2_eigenvectors
 
     # Use quiver to generate the basic plot
     fig = plt.figure(figsize=(5, 5))
@@ -105,4 +105,4 @@ def pca_top2_extraction(data):
     
     return top2_withnames
 
-pca_top2_extraction()
+pca_exercise()
