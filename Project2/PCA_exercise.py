@@ -14,14 +14,17 @@ def pca_top2_extraction(data):
     x_s = quantify_data(data, True)
     corelation_matrix = np.corrcoef(x_s.T)
     eigen_values, eigen_vectors = np.linalg.eig(corelation_matrix)
-    eigen_pairs = [(np.abs(eigen_values[i]), eigen_vectors[:, i], names[i]) for i in range(len(eigen_values))]
+    eigen_pairs = [(np.abs(eigen_values[i]), eigen_vectors[:, i], i) for i in range(len(eigen_values))]
     eigen_pairs.sort()
     eigen_pairs.reverse()
+    top2_names = []
+    top2_names.append(eigen_pairs[0][2])
+    top2_names.append(eigen_pairs[1][2])
     top2_eigenvectors = np.hstack((eigen_pairs[0][1].reshape(len(eigen_values), 1),
                                    eigen_pairs[1][1].reshape(len(eigen_values), 1)))
-    
-    top2_withnames = pd.DataFrame(top2_eigenvectors, columns=[eigen_pairs[0][2], eigen_pairs[1][2]])
-    return top2_withnames
+    # print(top2_eigenvectors)
+    # top2_withnames = pd.DataFrame(top2_eigenvectors, columns=[eigen_pairs[0][2], eigen_pairs[1][2]])
+    return top2_eigenvectors, top2_names
 
 def pca_top2_extraction_testing(data):
     x_s = quantify_data(data, True)
@@ -45,7 +48,8 @@ def pca_top2_extraction_testing(data):
 
 def pca_exercise():
     path = r'./data/wines_properties.csv'
-    data = prepare_and_load_data(path,skiprows=0)
+    data = prepare_and_load_data(path, skip_rows=0)
+    top2_vectors_1,top2_names_1 = pca_top2_extraction(data)
     x_s = quantify_data(data, True)
     covariance_matrix = np.cov(x_s.T)
     eigen_values, eigen_vectors = np.linalg.eig(covariance_matrix)
@@ -88,4 +92,4 @@ def pca_exercise():
 
 
 
-#pca_exercise()
+pca_exercise()

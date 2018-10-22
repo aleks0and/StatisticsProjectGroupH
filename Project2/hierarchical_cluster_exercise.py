@@ -70,7 +70,7 @@ def assignment2_point2_specified():
     plt.show()
     return None
 
-assignment2_point2_specified ()
+#assignment2_point2_specified ()
 
-#assignment2_point2()
+hierarchical_cluster_analysis()
 
