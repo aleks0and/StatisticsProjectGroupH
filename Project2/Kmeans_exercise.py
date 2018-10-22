@@ -160,6 +160,6 @@ def assignment2_point3_top2_eigenvalues():
 # nice example for the use of this method!
 # for the purpose of testing I will not load the database in the arguments.
 
-#assignment2_point3()
-#best_k_for_kmeans()
-#silhouette()
+assignment2_point3()
+best_k_for_kmeans()
+silhouette()

@@ -10,7 +10,7 @@ from sklearn.decomposition import PCA
 
 def principal_components_comparison_given_columns(column_id):
     path = r'./data/wines_properties.csv'
-    data = prepare_and_load_data(path,skip_rows=0)
+    data = prepare_and_load_data(path,skiprows=0)
     x_s = quantify_data(data, True)
     covariance_matrix = np.cov(x_s.T)
     eigen_values, eigen_vectors = np.linalg.eig(covariance_matrix)
@@ -100,9 +100,11 @@ def principal_components_comparison_given_data(data, column_id):
     plt.show()
 
 
+
 # Run the comparison between the 3rd PC and all the others
-# principal_components_comparison_given_columns(2)
+principal_components_comparison_given_columns(2)
 # Run the comparison between the 4th PC and all the others given dataset.
+#principal_components_comparison_given_columns(3)
 # we assume that the dataset is prepraed beferehand.
 #path = r'./data/wines_properties.csv'
 #wine_data = prepare_and_load_data(path, skip_rows=0)
