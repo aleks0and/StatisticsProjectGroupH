@@ -78,7 +78,7 @@ def assignment2_point3_top2_eigenvalues():
     
     #Data processing
     path = r'./data/wines_properties.csv'
-    wine_data = prepare_and_load_data(path, skiprows=0)
+    wine_data = prepare_and_load_data(path, skip_rows=0)
     wine_data_reduced = wine_data.loc[:, ['Alcohol', 'Malic_Acid']]
     wine_data_reduced_matrix = quantify_data(wine_data_reduced, False)
     
@@ -90,7 +90,7 @@ def assignment2_point3_top2_eigenvalues():
     plot_clusters(wine_data_reduced_matrix, wine_predicted_clusters, kmeans_init, number_of_clusters)
     print("plotted assignment2_point3")
     return None
-# assignment2_point3_top2_eigenvalues()
+assignment2_point3_top2_eigenvalues()
 
     
 # Execrise 3.3. + 3.4.
