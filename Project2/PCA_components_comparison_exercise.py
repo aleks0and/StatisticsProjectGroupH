@@ -136,8 +136,9 @@ def principal_components_comparison_3by3(data):
                            compared_eigenvectors[0,], compared_eigenvectors[1, :],
                            angles='xy', scale_units='xy', scale=1.5, color=colors)
                 for i, j, z in zip(compared_eigenvectors[1, :] + 0.02, compared_eigenvectors[0, :] + 0.02,
-                                   compared_vectors_name):
-                    plt.text(j, i, z, ha='center', va='center')
+                                   range(1,14)):
+                    label = "PCA" + str(z)
+                    plt.text(j, i, label, ha='center', va='center')
                 circle = plt.Circle((0, 0), 0.5, facecolor='none', edgecolor='b')
                 plt.gca().add_artist(circle)
                 vectors_to_compare+=-1
@@ -146,13 +147,13 @@ def principal_components_comparison_3by3(data):
 
 
 # Run the comparison between the 3rd PC and all the others
-# principal_components_comparison_given_columns(2)
+ #principal_components_comparison_given_columns(2)
 # Run the comparison between the 4th PC and all the others given dataset.
 # we assume that the dataset is prepraed beferehand.
 #path = r'./data/wines_properties.csv'
 #wine_data = prepare_and_load_data(path, skiprows=0)
 # #principal_components_comparison_given_data(wine_data, 1)
-#principal_components_comparison_3by3(wine_data)
+principal_components_comparison_3by3(wine_data)
 # path = r'./data/wines_properties.csv'
 # wine_data = prepare_and_load_data(path, skip_rows=0)
 # principal_components_comparison_given_data(wine_data,3)
