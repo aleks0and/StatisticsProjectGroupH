@@ -11,8 +11,6 @@ def hierarchical_cluster_analysis():
     path = r'./data/wines_properties.csv'
     wine_data = pd.read_csv(path, skiprows=0)
     clusters = linkage(pdist(wine_data, metric='euclidean'), method='complete')
-    #headers = list(wine_data)
-    #print(headers)
     labels = ['row label 1', 'row label 2', 'distance', 'no. of items in clust.']
     clusters_labeled = pd.DataFrame(clusters,
                                  columns=labels,
@@ -23,7 +21,6 @@ def hierarchical_cluster_analysis():
                                   color_threshold=712,
                                   no_labels = True
                                   )
-
     plt.title ("Hierachical Analysis including 14 dimensions")
     plt.xlabel("Cluster Labels excluded for better comprehension")
     plt.ylabel("Dist")
