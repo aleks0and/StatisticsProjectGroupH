@@ -115,13 +115,7 @@ def original_vars_PCA():
             tol=1e-04,
             random_state=0)
     y_km = km.fit_predict(wine_data)
-    
-    names = np.array(["Alcohol","Malic_Acid","Ash","Ash_Alcanity",
-                             "Magnesium","Total_Phenols","Flavanoids",
-                             "Nonflavanoid_Phenols","Proanthocyanins",
-                             "Color_Intensity","Hue","OD280","Proline",
-                             "Customer_Segment","Cluster"])
-    
+    names = list(wine_data)
     wine_data_with_clusters = pd.DataFrame(np.hstack((wine_data, y_km.reshape(len(wine_data), 1))), columns = names)
     
     cluster1 = wine_data_with_clusters[wine_data_with_clusters["Cluster"]  == 0]
