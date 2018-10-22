@@ -11,7 +11,7 @@ pd.set_option('display.max_columns', 20)
 def assignment2_point3():
     path = r'./data/wines_properties.csv'
     wine_data = prepare_and_load_data(path, skiprows=0)
-    wine_data_matrix = quantify_data(wine_data_matrix, False)
+    wine_data_matrix = quantify_data(wine_data, False)
     print(wine_data_matrix)
     headers = list(wine_data)
     print(headers)
