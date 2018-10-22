@@ -9,7 +9,11 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
+from sklearn.metrics import silhouette_score
+from sklearn.preprocessing import StandardScaler
 from matplotlib import cm
+from PCA_exercise import pca_top2_extraction
+from sklearn.decomposition import PCA
 from sklearn.metrics import silhouette_samples
 from util import prepare_and_load_data, plot_clusters, quantify_data
 pd.set_option('display.max_columns', 20)
@@ -160,6 +164,6 @@ def assignment2_point3_top2_eigenvalues():
 # nice example for the use of this method!
 # for the purpose of testing I will not load the database in the arguments.
 
-assignment2_point3()
-best_k_for_kmeans()
-silhouette()
+#assignment2_point3()
+#best_k_for_kmeans()
+#silhouette()
