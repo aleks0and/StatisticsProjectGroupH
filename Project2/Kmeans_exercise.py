@@ -9,16 +9,19 @@ pd.set_option('display.max_columns', 20)
 
 
 def assignment2_point3():
+    
+    # Loading the data
     path = r'./data/wines_properties.csv'
     wine_data = prepare_and_load_data(path, skiprows=0)
     wine_data_matrix = quantify_data(wine_data, False)
-    print(wine_data_matrix)
-    headers = list(wine_data)
-    print(headers)
+    
+    # Performing Kmeans
     number_of_clusters = 8
     kmeans_init = KMeans(n_clusters=number_of_clusters,
                          init='random')
     wine_predicted_clusters = kmeans_init.fit_predict(wine_data_matrix)
+    
+    #Plotting of results
     plot_clusters(wine_data_matrix, wine_predicted_clusters, kmeans_init, number_of_clusters)
     return None
 
@@ -27,8 +30,12 @@ def assignment2_point3():
 ##### 3.1. Creating the silhouette plot #####
 
 def silhouette():
+    
+    #Processing the data
     path = r'./data/wines_properties.csv'
     wine_data = prepare_and_load_data(path, skiprows=0)
+    
+    #Performing Kmeans
     km = KMeans(n_clusters=3, 
             init='k-means++', 
             n_init=10, 
@@ -37,8 +44,10 @@ def silhouette():
             random_state=0)
     y_km = km.fit_predict(wine_data)
     cluster_labels = np.unique(y_km)
-    cluster_labels
+    
     n_clusters = cluster_labels.shape[0]
+    
+    #Creating the silhouette plot
     silhouette_vals = silhouette_samples(wine_data, y_km, metric='euclidean')
     y_ax_lower, y_ax_upper = 0, 0
     yticks = []
@@ -66,13 +75,14 @@ def silhouette():
 #Exercise 3.2.
 
 def assignment2_point3_top2_eigenvalues():
+    
+    #Data processing
     path = r'./data/wines_properties.csv'
     wine_data = prepare_and_load_data(path, skiprows=0)
     wine_data_reduced = wine_data.loc[:, ['Alcohol', 'Malic_Acid']]
     wine_data_reduced_matrix = quantify_data(wine_data_reduced, False)
-    print(wine_data_reduced)
-    headers = list(wine_data)
-    print(headers)
+    
+    #Performing Kmeans
     number_of_clusters = 4
     kmeans_init = KMeans(n_clusters=number_of_clusters,
                          init='random')
