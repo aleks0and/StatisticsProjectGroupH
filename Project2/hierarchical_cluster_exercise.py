@@ -25,14 +25,12 @@ def hierarchical_cluster_analysis():
     print(clusters_labeled)
     clusterDendogram = dendrogram(clusters,
                                   color_threshold=712,
-                                  
                                   #truncate_mode ="lastp",
                                   no_labels = True
                                   )
 
     plt.title ("Hierachical Analysis including 14 dimensions")
     plt.xlabel("Cluster Labels excluded for better comprehension")
-    plt.
     plt.ylabel("Dist")
     fig = plt.figure()
     plt.tight_layout()
