@@ -22,13 +22,12 @@ def main():
     silhouette()
     
     #point 3.2: Plot on the space of the first two dimensions of the PCA the clusters obtained with K-means
-    best_k_for_kmeans()
-    best_k_for_kmeans_given_data
+    assignment2_point3_top2_eigenvalues
     
     principal_components_comparison_given_data()
     principal_components_comparison_given_data_all_in_one()
     
-    #point 3.3: 
+    #point 3.3 and 3.4:
     original_vars_PCA()
     
     
