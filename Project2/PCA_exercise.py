@@ -6,6 +6,7 @@ from util import prepare_and_load_data, quantify_data, plot_clusters
 
 
 
+
 def pca_top2_extraction(data):
     names = list(data)
     x_s = quantify_data(data, True)
@@ -76,6 +77,28 @@ def pca_exercise():
     plt.xlabel('PC 0')
     plt.ylabel('PC 1')
     plt.show()
+
+# Scree plot for our report 
+
+# Preparing the data
+data = prepare_and_load_data(path = r'./data/wines_properties.csv', skip_rows = 0)
+X_s = quantify_data(data, True)
+mean_vector = np.mean(X_s, axis = 0)
+N = X_s.shape[0]
+
+#Generating the Covariance Matrix, Eigenvectors and Eigenvalues
+covariance_matrix = (X_s - mean_vector).T.dot((X_s - mean_vector)) / (N-1)
+eigen_values, eigen_vectors = np.linalg.eig(covariance_matrix)
+pd.DataFrame(eigen_values)
+
+# Generating data for the Scree Plot
+tot_eig_vals = sum (eigen_values)
+sorted_eigenvalues = sorted(eigen_values, reverse = True )
+variance_explained = [(i / tot_eig_vals)*100 for i in sorted_eigenvalues]
+
+
+# Plotting the Scree Plot 
+plt.xlabel("Dimensions")
+plt.plot(1/np.cumsum(variance_explained))
     
 
-#pca_exercise()
