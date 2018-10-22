@@ -12,7 +12,7 @@ def assignment2_point3():
     
     # Loading the data
     path = r'./data/wines_properties.csv'
-    wine_data = prepare_and_load_data(path, skiprows=0)
+    wine_data = prepare_and_load_data(path, skip_rows=0)
     wine_data_matrix = quantify_data(wine_data, False)
     
     # Performing Kmeans
@@ -33,7 +33,7 @@ def silhouette():
     
     #Processing the data
     path = r'./data/wines_properties.csv'
-    wine_data = prepare_and_load_data(path, skiprows=0)
+    wine_data = prepare_and_load_data(path, skip_rows=0)
     
     #Performing Kmeans
     km = KMeans(n_clusters=3, 
