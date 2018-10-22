@@ -8,7 +8,6 @@ from sklearn.cluster import KMeans
 
 def best_k_for_kmeans_given_data(data):
     first_two_principal_components = pca_top2_extraction(data)
-    print(first_two_principal_components)
     wine_data_reduced = quantify_data(data, True).dot(first_two_principal_components)
     wine_data_reduced_matrix = wine_data_reduced
     min_cluster = 2
@@ -39,7 +38,6 @@ def best_k_for_kmeans():
     wine_data = prepare_and_load_data(path, skip_rows=0)
     # hardcoded column names to be changed for the PCI analysis
     first_two_principal_components = pca_top2_extraction(wine_data)
-    print(first_two_principal_components)
     wine_data_reduced = quantify_data(wine_data, True).dot(first_two_principal_components)
     wine_data_reduced_matrix = wine_data_reduced
     # check with pca
@@ -74,4 +72,4 @@ def best_k_for_kmeans():
 
 path = r'./data/wines_properties.csv'
 wine_data = prepare_and_load_data(path, skip_rows=0)
-#number = best_k_for_kmeans_given_data(wine_data)
+number = best_k_for_kmeans_given_data(wine_data)
