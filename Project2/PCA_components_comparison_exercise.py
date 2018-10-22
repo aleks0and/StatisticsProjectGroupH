@@ -23,17 +23,17 @@ def principal_components_comparison_given_columns(column_id):
     plt.figure(figsize=(15,9))
     plt.subplots_adjust(wspace=0.5, hspace=0.5)
     for i in range(0,len(PCs)):
-        if(i != column_id):
+        if i != column_id:
             compared_vectors_name.clear()
             compared_vectors_name.append(feature_names[column_id])
             compared_vectors_name.append(feature_names[i])
-            plt.subplot(3,5,i+1)
+            plt.subplot(3, 5, i+1)
             plt.axis('equal')
             plt.xlim([-1.0, 1.0])
             plt.ylim([-1.0, 1.0])
             plt.xlabel('PC 0')
             plt.ylabel('PC 1')
-            plt.title('%d' %i)
+            plt.title('%d' %i )
             plt.grid(True)
             compared_eigenvectors = np.hstack((eigen_vectors_values[column_id][1].reshape(len(eigen_values), 1),
                                                eigen_vectors_values[i][1].reshape(len(eigen_values), 1)
@@ -62,17 +62,17 @@ def principal_components_comparison_given_data(data, column_id):
     plt.figure(figsize=(15,9))
     plt.subplots_adjust(wspace=0.5, hspace=0.5)
     for i in range(0,len(PCs)):
-        if(i != column_id):
+        if i != column_id:
             compared_vectors_name.clear()
             compared_vectors_name.append(feature_names[column_id])
             compared_vectors_name.append(feature_names[i])
-            plt.subplot(3,5,i+1)
+            plt.subplot(3, 5, i+1)
             plt.axis('equal')
             plt.xlim([-1.0, 1.0])
             plt.ylim([-1.0, 1.0])
             plt.xlabel('PC 0')
             plt.ylabel('PC 1')
-            plt.title('%d' %i)
+            plt.title('%d' % i)
             plt.grid(True)
             compared_eigenvectors = np.hstack((eigen_vectors_values[column_id][1].reshape(len(eigen_values), 1),
                                                eigen_vectors_values[i][1].reshape(len(eigen_values), 1)
@@ -88,9 +88,9 @@ def principal_components_comparison_given_data(data, column_id):
     plt.show()
 
 
-# Run the comparison between the 3rd column and all the others
+# Run the comparison between the 3rd PC and all the others
 # principal_components_comparison_given_columns(2)
-# Run the comparison between the 4th column and all the others given dataset.
+# Run the comparison between the 4th PC and all the others given dataset.
 # we assume that the dataset is prepraed beferehand.
 # path = r'./data/wines_properties.csv'
 # wine_data = prepare_and_load_data(path, skip_rows=0)
