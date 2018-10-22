@@ -88,4 +88,4 @@ def pca_exercise():
 
 
 
-#pca_exercise()
+pca_exercise()

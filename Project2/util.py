@@ -24,8 +24,8 @@ def plot_clusters(data, predicted_clusters, initialized_kmeans, number_of_cluste
     plt.show()
 
 # loading data and omiting specified number of rows, also dropping the rows with missing values.
-def prepare_and_load_data(path, skip_rows):
-    data = pd.read_csv(path, skiprows=skip_rows)
+def prepare_and_load_data(path, skiprows):
+    data = pd.read_csv(path, skiprows=skiprows)
     data.dropna(how="all", inplace=True)
     return data
 

@@ -36,7 +36,7 @@ def best_k_for_kmeans_given_data(data):
 
 def best_k_for_kmeans():
     path = r'./data/wines_properties.csv'
-    wine_data = prepare_and_load_data(path, skip_rows=0)
+    wine_data = prepare_and_load_data(path, skiprows=0)
     # hardcoded column names to be changed for the PCI analysis
     first_two_principal_components = pca_top2_extraction(wine_data)
     print(first_two_principal_components)
@@ -73,5 +73,7 @@ def best_k_for_kmeans():
     return last_best_cluster_index
 
 path = r'./data/wines_properties.csv'
-wine_data = prepare_and_load_data(path, skip_rows=0)
+wine_data = prepare_and_load_data(path, skiprows=0)
 #number = best_k_for_kmeans_given_data(wine_data)
+
+best_k_for_kmeans()
