@@ -24,7 +24,6 @@ def hierarchical_cluster_analysis():
                                  )
     print(clusters_labeled)
     clusterDendogram = dendrogram(clusters)
-    fig = plt.figure()
 
     plt.tight_layout()
     plt.ylabel("Dist")
