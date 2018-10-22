@@ -31,7 +31,7 @@ def prepare_and_load_data(path, skiprows):
 
 
 def quantify_data(data, standardization):
-    result = pd.DataFrame.as_matrix(data)
+    result = data.values
     if standardization:
         result = StandardScaler().fit_transform(result)
     return result
