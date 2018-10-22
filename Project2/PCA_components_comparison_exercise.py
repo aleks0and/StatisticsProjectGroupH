@@ -4,20 +4,8 @@ import matplotlib.pyplot as plt
 import plotly as py
 from sklearn.preprocessing import StandardScaler
 import matplotlib.cm as cm
+from util import prepare_and_load_data, quantify_data
 from sklearn.decomposition import PCA
-
-
-def prepare_and_load_data(path, skip_rows):
-    data = pd.read_csv(path, skiprows=skip_rows)
-    data.dropna(how="all", inplace=True)
-    return data
-
-
-def quantify_data(dataset, standardization):
-    result = dataset.values
-    if standardization:
-        result = StandardScaler().fit_transform(result)
-    return result
 
 
 def principal_components_comparison():
@@ -28,8 +16,8 @@ def principal_components_comparison():
     eigen_values, eigen_vectors = np.linalg.eig(covariance_matrix)
     eigen_vectors_values = [(np.abs(eigen_values[i]), eigen_vectors[:, i])
                             for i in range(len(eigen_vectors))]
-    #eigen_vectors_values.sort()
-    #eigen_vectors_values.reverse()
+    # eigen_vectors_values.sort()
+    # eigen_vectors_values.reverse()
     top2_eigenvectors = np.hstack((eigen_vectors_values[0][1].reshape(len(eigen_values), 1),
                                    eigen_vectors_values[1][1].reshape(len(eigen_values), 1),
                                    ))

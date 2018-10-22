@@ -3,52 +3,44 @@ import numpy as np
 import matplotlib.pyplot as plt
 import plotly as py
 from sklearn.preprocessing import StandardScaler
+from util import prepare_and_load_data, quantify_data, plot_clusters
 from sklearn.decomposition import PCA
 #%matplotlib inline
 
 
-def prepare_and_load_data(path,skiprows):
-    data = pd.read_csv(path,skiprows=skiprows)
-    data.dropna(how="all", inplace=True)
-    return data
-
-
-def quantify_data(data, standardization):
-    result = data.values
-    if standardization:
-        result = StandardScaler().fit_transform(result)
-    return result
-
 
 def pca_top2_extraction(data):
-<<<<<<< HEAD
-    x_s = quantify_data(data, True)
     names = list(data)
-=======
-    x_s = quantify_data(data, True)  
-<<<<<<< HEAD
-    
-    names = ["Alcohol","Malic_Acid","Ash","Ash_Alcanity",
-                             "Magnesium","Total_Phenols","Flavanoids",
-                             "Nonflavanoid_Phenols","Proanthocyanins",
-                             "Color_Intensity","Hue","OD280","Proline",
-                             "Customer_Segment"]
-    
->>>>>>> 13ff4771733e8761e05cebf5da923eed35e50bc0
+    x_s = quantify_data(data, True)
     corelation_matrix = np.corrcoef(x_s.T)
     eigen_values, eigen_vectors = np.linalg.eig(corelation_matrix)
-=======
-    names = list(data)
-    correlation_matrix = np.corrcoef(x_s.T)
-    eigen_values, eigen_vectors = np.linalg.eig(correlation_matrix)
->>>>>>> 5ee26a04e93e6a03d336cef5d3a2f8781aeb6540
     eigen_pairs = [(np.abs(eigen_values[i]), eigen_vectors[:, i], names[i]) for i in range(len(eigen_values))]
     eigen_pairs.sort()
     eigen_pairs.reverse()
     top2_eigenvectors = np.hstack((eigen_pairs[0][1].reshape(len(eigen_values), 1),
                                    eigen_pairs[1][1].reshape(len(eigen_values), 1)))
     
-    top2_withnames = pd.DataFrame(top2_eigenvectors, columns = [eigen_pairs[0][2],eigen_pairs[1][2]])
+    top2_withnames = pd.DataFrame(top2_eigenvectors, columns=[eigen_pairs[0][2], eigen_pairs[1][2]])
+    return top2_withnames
+
+def pca_top2_extraction_testing(data):
+    x_s = quantify_data(data, True)
+    names = ["Alcohol", "Malic_Acid", "Ash", "Ash_Alcanity",
+             "Magnesium", "Total_Phenols", "Flavanoids",
+             "Nonflavanoid_Phenols", "Proanthocyanins",
+             "Color_Intensity", "Hue", "OD280", "Proline",
+             "Customer_Segment"]
+    corelation_matrix = np.corrcoef(x_s.T)
+    eigen_values, eigen_vectors = np.linalg.eig(corelation_matrix)
+    eigen_pairs = [(np.abs(eigen_values[i]), eigen_vectors[:, i], names[i]) for i in range(len(eigen_values))]
+    eigen_unsorted = eigen_pairs
+    print(eigen_pairs, eigen_unsorted)
+    eigen_pairs.sort()
+    eigen_pairs.reverse()
+    top2_eigenvectors = np.hstack((eigen_pairs[0][1].reshape(len(eigen_values), 1),
+                                   eigen_pairs[1][1].reshape(len(eigen_values), 1)))
+
+    top2_withnames = pd.DataFrame(top2_eigenvectors, columns=[eigen_pairs[0][2], eigen_pairs[1][2]])
     return top2_withnames
 
 def pca_exercise():
@@ -97,29 +89,3 @@ def pca_exercise():
 
 
 #pca_exercise()
-
-
-def pca_top2_extraction(data):
-    x_s = quantify_data(data, True)  
-    
-    names = ["Alcohol","Malic_Acid","Ash","Ash_Alcanity",
-                             "Magnesium","Total_Phenols","Flavanoids",
-                             "Nonflavanoid_Phenols","Proanthocyanins",
-                             "Color_Intensity","Hue","OD280","Proline",
-                             "Customer_Segment"]
-    
-    corelation_matrix = np.corrcoef(x_s.T)
-    eigen_values, eigen_vectors = np.linalg.eig(corelation_matrix)
-    eigen_pairs = [(np.abs(eigen_values[i]), eigen_vectors[:, i], names[i]) for i in range(len(eigen_values))]
-    eigen_unsorted = eigen_pairs
-    print(eigen_pairs, eigen_unsorted)
-    eigen_pairs.sort()
-    eigen_pairs.reverse()
-    top2_eigenvectors = np.hstack((eigen_pairs[0][1].reshape(len(eigen_values), 1),
-                                   eigen_pairs[1][1].reshape(len(eigen_values), 1)))
-    
-    top2_withnames = pd.DataFrame(top2_eigenvectors, columns = [eigen_pairs[0][2],eigen_pairs[1][2]])
-    
-    return top2_withnames
-
-pca_exercise()
