@@ -78,19 +78,19 @@ def assignment2_point3_top2_eigenvalues():
     
     #Data processing
     path = r'./data/wines_properties.csv'
-    wine_data = prepare_and_load_data(path, skiprows=0)
+    wine_data = prepare_and_load_data(path, skip_rows=0)
     wine_data_reduced = wine_data.loc[:, ['Alcohol', 'Malic_Acid']]
     wine_data_reduced_matrix = quantify_data(wine_data_reduced, False)
     
     #Performing Kmeans
-    number_of_clusters = 4
+    number_of_clusters = 3
     kmeans_init = KMeans(n_clusters=number_of_clusters,
                          init='random')
     wine_predicted_clusters = kmeans_init.fit_predict(wine_data_reduced)
     plot_clusters(wine_data_reduced_matrix, wine_predicted_clusters, kmeans_init, number_of_clusters)
     print("plotted assignment2_point3")
     return None
-# assignment2_point3_top2_eigenvalues()
+assignment2_point3_top2_eigenvalues()
 
     
 # Execrise 3.3. + 3.4.
@@ -106,8 +106,13 @@ def original_vars_PCA():
             tol=1e-04,
             random_state=0)
     y_km = km.fit_predict(wine_data)
-    names = list(wine_data)
-    wine_data_with_clusters = pd.DataFrame(np.hstack((wine_data, y_km.reshape(len(wine_data), 1))), columns = names)
+    
+    
+    names = ["Alcohol","Malic_Acid","Ash","Ash_Alcanity","Magnesium","Total_Phenols",
+             "Flavanoids","Nonflavanoid_Phenols","Proanthocyanins",
+             "Color_Intensity","Hue","OD280","Proline","Cluster"]
+
+    wine_data_with_clusters = pd.DataFrame(np.hstack((wine_data, y_km.reshape(-1, 1))), columns = names)
     
     
     # Defining three cluster for PCA purpose
@@ -158,3 +163,5 @@ def original_vars_PCA():
     top2_withnames = pd.DataFrame(top2_eigenvectors, columns = [eigen_pairs[0][2],eigen_pairs[1][2]])
     print(top2_withnames)
     return top2_withnames
+
+original_vars_PCA()
