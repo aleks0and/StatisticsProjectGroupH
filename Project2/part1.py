@@ -10,11 +10,6 @@ data.dropna(how = "all", inplace=True)
 # Storing only the numerical variables 
 X = data.iloc[:, 0:-1]
 
-#preimplemented PCA
-my_pca = PCA(n_components=13)
-new_projected_data = my_pca.fit(data)
-PCs1 = new_projected_data.components_
-
 #standardization
 from sklearn.preprocessing import StandardScaler
 X_s = StandardScaler().fit_transform(X)
