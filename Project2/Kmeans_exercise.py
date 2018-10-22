@@ -23,23 +23,8 @@ def assignment2_point3():
     return None
 
 
-#only for top2 eigenvalues Alcohol and Malic_Acid
-def assignment2_point3_top2_eigenvalues():
-    path = r'./data/wines_properties.csv'
-    wine_data = prepare_and_load_data(path, skiprows=0)
-    wine_data_reduced = wine_data.loc[:, ['Alcohol', 'Malic_Acid']]
-    wine_data_reduced_matrix = quantify_data(wine_data_reduced, False)
-    print(wine_data_reduced)
-    headers = list(wine_data)
-    print(headers)
-    number_of_clusters = 4
-    kmeans_init = KMeans(n_clusters=number_of_clusters,
-                         init='random')
-    wine_predicted_clusters = kmeans_init.fit_predict(wine_data_reduced)
-    plot_clusters(wine_data_reduced_matrix, wine_predicted_clusters, kmeans_init, number_of_clusters)
-    print("plotted assignment2_point3")
-    return None
-# assignment2_point3_top2_eigenvalues()
+
+##### 3.1. Creating the silhouette plot #####
 
 def silhouette():
     path = r'./data/wines_properties.csv'
@@ -78,10 +63,31 @@ def silhouette():
     plt.tight_layout()
     plt.show()
     
-# Execrise 3.3.
-def original_vars_PCA():
+#Exercise 3.2.
+
+def assignment2_point3_top2_eigenvalues():
     path = r'./data/wines_properties.csv'
     wine_data = prepare_and_load_data(path, skiprows=0)
+    wine_data_reduced = wine_data.loc[:, ['Alcohol', 'Malic_Acid']]
+    wine_data_reduced_matrix = quantify_data(wine_data_reduced, False)
+    print(wine_data_reduced)
+    headers = list(wine_data)
+    print(headers)
+    number_of_clusters = 4
+    kmeans_init = KMeans(n_clusters=number_of_clusters,
+                         init='random')
+    wine_predicted_clusters = kmeans_init.fit_predict(wine_data_reduced)
+    plot_clusters(wine_data_reduced_matrix, wine_predicted_clusters, kmeans_init, number_of_clusters)
+    print("plotted assignment2_point3")
+    return None
+# assignment2_point3_top2_eigenvalues()
+
+    
+# Execrise 3.3. + 3.4.
+    
+def original_vars_PCA():
+    path = r'./data/wines_properties.csv'
+    wine_data = prepare_and_load_data(path, skip_rows=0)
     wine_data.dropna(how="all", inplace=True)
     km = KMeans(n_clusters=3, 
             init='k-means++', 
@@ -92,11 +98,16 @@ def original_vars_PCA():
     y_km = km.fit_predict(wine_data)
     names = list(wine_data)
     wine_data_with_clusters = pd.DataFrame(np.hstack((wine_data, y_km.reshape(len(wine_data), 1))), columns = names)
+    
+    
+    # Defining three cluster for PCA purpose
     cluster1 = wine_data_with_clusters[wine_data_with_clusters["Cluster"]  == 0]
     cluster2 = wine_data_with_clusters[wine_data_with_clusters["Cluster"]  == 1]
     cluster3 = wine_data_with_clusters[wine_data_with_clusters["Cluster"]  == 2]
 
-    x_s = quantify_data(cluster3, True)
+    
+    # PCA for the first cluster
+    x_s = quantify_data(cluster1, True)
     corelation_matrix = np.corrcoef(x_s.T)
     eigen_values, eigen_vectors = np.linalg.eig(corelation_matrix[:-1,:-1])
     eigen_pairs = [(np.abs(eigen_values[i]), eigen_vectors[:, i], names[i]) for i in range(len(eigen_values))]
@@ -110,3 +121,30 @@ def original_vars_PCA():
     return top2_withnames
 
 
+    # PCA for the second cluster
+    x_s = quantify_data(cluster2, True)
+    corelation_matrix = np.corrcoef(x_s.T)
+    eigen_values, eigen_vectors = np.linalg.eig(corelation_matrix[:-1,:-1])
+    eigen_pairs = [(np.abs(eigen_values[i]), eigen_vectors[:, i], names[i]) for i in range(len(eigen_values))]
+    eigen_pairs.sort()
+    eigen_pairs.reverse()
+    top2_eigenvectors = np.hstack((eigen_pairs[0][1].reshape(len(eigen_values), 1),
+                                   eigen_pairs[1][1].reshape(len(eigen_values), 1)))
+    
+    top2_withnames = pd.DataFrame(top2_eigenvectors, columns = [eigen_pairs[0][2],eigen_pairs[1][2]])
+    print(top2_withnames)
+    return top2_withnames
+
+  # PCA for the third cluster
+    x_s = quantify_data(cluster3, True)
+    corelation_matrix = np.corrcoef(x_s.T)
+    eigen_values, eigen_vectors = np.linalg.eig(corelation_matrix[:-1,:-1])
+    eigen_pairs = [(np.abs(eigen_values[i]), eigen_vectors[:, i], names[i]) for i in range(len(eigen_values))]
+    eigen_pairs.sort()
+    eigen_pairs.reverse()
+    top2_eigenvectors = np.hstack((eigen_pairs[0][1].reshape(len(eigen_values), 1),
+                                   eigen_pairs[1][1].reshape(len(eigen_values), 1)))
+    
+    top2_withnames = pd.DataFrame(top2_eigenvectors, columns = [eigen_pairs[0][2],eigen_pairs[1][2]])
+    print(top2_withnames)
+    return top2_withnames
