@@ -119,8 +119,8 @@ def principal_components_comparison_3by3(data):
                 if current_index == (current_index + (vectors_compared - vectors_to_compare)):
                     vectors_to_compare += -1
                 compared_vectors_name.clear()
-                compared_vectors_name.append(feature_names[current_index])
-                compared_vectors_name.append(feature_names[current_index+(vectors_compared-vectors_to_compare)])
+                compared_vectors_name.append("PCA"+str(current_index))
+                compared_vectors_name.append("PCA"+str(current_index+(vectors_compared-vectors_to_compare)))
                 plt.subplot(X_axis, Y_axis, i + 1)
                 plt.axis('equal')
                 plt.xlim([-1.0, 1.0])
@@ -136,9 +136,8 @@ def principal_components_comparison_3by3(data):
                            compared_eigenvectors[0,], compared_eigenvectors[1, :],
                            angles='xy', scale_units='xy', scale=1.5, color=colors)
                 for i, j, z in zip(compared_eigenvectors[1, :] + 0.02, compared_eigenvectors[0, :] + 0.02,
-                                   range(1,14)):
-                    label = "PCA" + str(z)
-                    plt.text(j, i, label, ha='center', va='center')
+                                   compared_vectors_name):
+                    plt.text(j, i, z, ha='center', va='center')
                 circle = plt.Circle((0, 0), 0.5, facecolor='none', edgecolor='b')
                 plt.gca().add_artist(circle)
                 vectors_to_compare+=-1
