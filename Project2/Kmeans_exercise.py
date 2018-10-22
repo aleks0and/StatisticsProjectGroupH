@@ -9,11 +9,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
-from sklearn.metrics import silhouette_score
-from sklearn.preprocessing import StandardScaler
 from matplotlib import cm
-from PCA_exercise import pca_top2_extraction
-from sklearn.decomposition import PCA
 from sklearn.metrics import silhouette_samples
 from util import prepare_and_load_data, plot_clusters, quantify_data
 pd.set_option('display.max_columns', 20)
@@ -24,12 +20,6 @@ pd.set_option('display.max_columns', 20)
 def assignment2_point3():
     path = r'./data/wines_properties.csv'
     wine_data = prepare_and_load_data(path, skiprows=0)
-    # PCA missing
-
-    # Silhouette plotting
-    # naive attempt
-    # naive attempt w/ generated
-
     wine_data_reduced = wine_data.loc[:, ['Alcohol', 'Malic_Acid']]
     wine_data_reduced_matrix = quantify_data(wine_data_reduced, False)
     print(wine_data_reduced)
@@ -47,8 +37,6 @@ def assignment2_point3():
 def assignment2_point3_top2_eigenvalues():
     path = r'./data/wines_properties.csv'
     wine_data = prepare_and_load_data(path, skiprows=0)
-    # PCA missing
-    # naive attempt w/ generated
     wine_data_reduced = wine_data.loc[:, ['Alcohol', 'Malic_Acid']]
     wine_data_reduced_matrix = quantify_data(wine_data_reduced, False)
     print(wine_data_reduced)
@@ -61,8 +49,7 @@ def assignment2_point3_top2_eigenvalues():
     plot_clusters(wine_data_reduced_matrix, wine_predicted_clusters, kmeans_init, number_of_clusters)
     print("plotted assignment2_point3")
     return None
-
-#assignment2_point3_top2_eigenvalues()
+# assignment2_point3_top2_eigenvalues()
 
 
 def silhouette():
@@ -117,12 +104,10 @@ def original_vars_PCA():
     y_km = km.fit_predict(wine_data)
     names = list(wine_data)
     wine_data_with_clusters = pd.DataFrame(np.hstack((wine_data, y_km.reshape(len(wine_data), 1))), columns = names)
-    
     cluster1 = wine_data_with_clusters[wine_data_with_clusters["Cluster"]  == 0]
     cluster2 = wine_data_with_clusters[wine_data_with_clusters["Cluster"]  == 1]
     cluster3 = wine_data_with_clusters[wine_data_with_clusters["Cluster"]  == 2]
-        
-   
+
     x_s = quantify_data(cluster3, True)
     corelation_matrix = np.corrcoef(x_s.T)
     eigen_values, eigen_vectors = np.linalg.eig(corelation_matrix[:-1,:-1])
@@ -135,16 +120,11 @@ def original_vars_PCA():
     top2_withnames = pd.DataFrame(top2_eigenvectors, columns = [eigen_pairs[0][2],eigen_pairs[1][2]])
     print(top2_withnames)
     return top2_withnames
-    
 
 #only for top2 eigenvalues Alcohol and Malic_Acid
 def assignment2_point3_top2_eigenvalues():
     path = r'./data/wines_properties.csv'
     wine_data = prepare_and_load_data(path, skiprows=0)
-    # PCA missing
-
-    # naive attempt w/ generated 
-
     wine_data_reduced = wine_data.loc[:, ['Alcohol', 'Malic_Acid']]
     wine_data_reduced_matrix = quantify_data(wine_data_reduced, False)
     print(wine_data_reduced)
@@ -156,7 +136,6 @@ def assignment2_point3_top2_eigenvalues():
     wine_predicted_clusters = kmeans_init.fit_predict(wine_data_reduced)
     plot_clusters(wine_data_reduced_matrix, wine_predicted_clusters, kmeans_init, number_of_clusters)
     print("plotted assignment2_point3")
-
 
 # assignment2_point3()
 # Exercise 4

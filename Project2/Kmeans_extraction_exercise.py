@@ -1,8 +1,6 @@
 from util import prepare_and_load_data, quantify_data, plot_clusters
 from PCA_exercise import pca_top2_extraction
 from sklearn.metrics import silhouette_score
-
-
 from sklearn.cluster import KMeans
 
 

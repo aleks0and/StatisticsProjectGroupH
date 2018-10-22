@@ -61,7 +61,7 @@ def pca_top2_extraction(data):
     top2_withnames = pd.DataFrame(top2_eigenvectors, columns=[eigen_pairs[0][2], eigen_pairs[1][2],eigen_pairs[2][2], eigen_pairs[3][2]])
     return top2_withnames
 
-pca_top2_extraction(prepare_and_load_data(path = r'./data/wines_properties.csv', skip_rows= 0))
+#pca_top2_extraction(prepare_and_load_data(path = r'./data/wines_properties.csv', skip_rows= 0))
 
 
 

@@ -1,11 +1,9 @@
 #Use a hierarchical cluster algorithm to guess a likely number of cluster present in the data
 import pandas as pd
-import numpy as np
-from scipy.spatial.distance import pdist,squareform
+from scipy.spatial.distance import pdist
 from scipy.cluster.hierarchy import linkage
 from scipy.cluster.hierarchy import dendrogram
 import matplotlib.pyplot as plt
-from sklearn.preprocessing import StandardScaler
 from util import quantify_data
 pd.set_option('display.max_columns', 20)
 
@@ -23,19 +21,15 @@ def hierarchical_cluster_analysis():
                                  index=['cluster %d' % (i + 1) for i in range(clusters.shape[0])]
                                  )
     print(clusters_labeled)
-
     clusterDendogram = dendrogram(clusters)
-
     plt.tight_layout()
     plt.ylabel("Dist")
     plt.show()
-
     return None
 
 
 # with specified PCA Factors Alcohol and Malic_Acid 
 def assignment2_point2_specified():
-
     path = r'./data/wines_properties.csv'
     wine_data = pd.read_csv(path, skiprows=0)
     wine_data_specified_reduced = wine_data.loc[:, ['Alcohol', 'Malic_Acid']]
@@ -49,7 +43,6 @@ def assignment2_point2_specified():
                                     index=['cluster %d' % (i + 1) for i in range(clusters.shape[0])]
                                     )
     #print(clusters_labeled)
-
     clusterDendogram = dendrogram(clusters,
                                   color_threshold=712,
                                   
@@ -59,7 +52,6 @@ def assignment2_point2_specified():
 
     plt.title ("Hierachical Analysis including 14 dimensions")
     plt.xlabel("Cluster Labels excluded for better comprehension")
-    #plt.
     plt.ylabel("Dist")
     fig = plt.figure()
     plt.tight_layout()
@@ -67,7 +59,7 @@ def assignment2_point2_specified():
 
     return None
 
-hierarchical_cluster_analysis()
+#hierarchical_cluster_analysis()
 
 
 # with specified PCA Factors Alcohol and Malic_Acid 

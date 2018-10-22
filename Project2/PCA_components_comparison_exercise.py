@@ -1,11 +1,8 @@
-import pandas as pd 
 import numpy as np
 import matplotlib.pyplot as plt
 import plotly as py
-from sklearn.preprocessing import StandardScaler
 import matplotlib.cm as cm
 from util import prepare_and_load_data, quantify_data
-from sklearn.decomposition import PCA
 
 def principal_components_comparison_given_columns(column_id):
     path = r'./data/wines_properties.csv'
@@ -152,7 +149,7 @@ def principal_components_comparison_3by3(data):
 #path = r'./data/wines_properties.csv'
 #wine_data = prepare_and_load_data(path, skiprows=0)
 # #principal_components_comparison_given_data(wine_data, 1)
-principal_components_comparison_3by3(wine_data)
+#principal_components_comparison_3by3(wine_data)
 # path = r'./data/wines_properties.csv'
 # wine_data = prepare_and_load_data(path, skip_rows=0)
 # principal_components_comparison_given_data(wine_data,3)

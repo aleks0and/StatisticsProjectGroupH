@@ -1,12 +1,9 @@
 #Use a hierarchical cluster algorithm to guess a likely number of cluster present in the data
 import pandas as pd
-import numpy as np
-from scipy.spatial.distance import pdist,squareform
+from scipy.spatial.distance import pdist
 from scipy.cluster.hierarchy import linkage
 from scipy.cluster.hierarchy import dendrogram
 import matplotlib.pyplot as plt
-from sklearn.preprocessing import StandardScaler
-from util import quantify_data
 pd.set_option('display.max_columns', 20)
 
 
@@ -38,7 +35,7 @@ def hierarchical_cluster_analysis():
 
     return None
 
-hierarchical_cluster_analysis()
+#hierarchical_cluster_analysis()
 
 
 # with specified PCA Factors Alcohol and Malic_Acid 

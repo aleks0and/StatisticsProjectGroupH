@@ -3,5 +3,5 @@ from hierarchical_cluster_exercise import classes_exercise
 
 def main():
 
-    classes_exercise()
+   # classes_exercise()
     return None

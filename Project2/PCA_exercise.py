@@ -2,10 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import plotly as py
-from sklearn.preprocessing import StandardScaler
 from util import prepare_and_load_data, quantify_data, plot_clusters
-from sklearn.decomposition import PCA
-#%matplotlib inline
 
 
 
@@ -58,10 +55,8 @@ def pca_exercise():
                                    ))
 
     py.offline.init_notebook_mode(connected=True)
-
     # Get the PCA components (loadings)
     PCs = top2_eigenvectors
-
     # Use quiver to generate the basic plot
     fig = plt.figure(figsize=(5, 5))
     plt.quiver(np.zeros(PCs.shape[1]), np.zeros(PCs.shape[1]),
@@ -75,17 +70,12 @@ def pca_exercise():
     # Add unit circle
     circle = plt.Circle((0, 0), 1, facecolor='none', edgecolor='b')
     plt.gca().add_artist(circle)
-
     plt.axis('equal')
     plt.xlim([-1.0, 1.0])
     plt.ylim([-1.0, 1.0])
-
     plt.xlabel('PC 0')
     plt.ylabel('PC 1')
-
     plt.show()
     
 
-
-
-pca_exercise()
+#pca_exercise()
