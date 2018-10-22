@@ -1,12 +1,19 @@
 import pandas as pd 
 import numpy as np 
+from sklearn.decomposition import PCA 
+
 data = pd.read_csv(r"C:\Users\Michal\Documents\GitHub\StatisticsProjectGroupH\Project2\data\wines_properties.csv")
 
 ### dropping missing values 
 data.dropna(how = "all", inplace=True)
 
 # Storing only the numerical variables 
-X = data.iloc[:, 0:]
+X = data.iloc[:, 0:-1]
+
+#preimplemented PCA
+my_pca = PCA(n_components=13)
+new_projected_data = my_pca.fit(data)
+PCs1 = new_projected_data.components_
 
 #standardization
 from sklearn.preprocessing import StandardScaler
@@ -29,8 +36,8 @@ eigen_vectors_values = [ ( np.abs(eigen_values[i]), eigen_vectors[:, i] )
                         for i in range(len(eigen_values)) ]
 
 ## Creating the top-2 eigenvectors matrix (4 x 2)
-top2_eigenvectors = np.hstack( ( eigen_vectors_values[0][1].reshape(2, -1), 
-                             eigen_vectors_values[1][1].reshape(2, -1) ) )
+top2_eigenvectors = np.vstack( ( eigen_vectors_values[0][1].reshape(1, -1), 
+                             eigen_vectors_values[1][1].reshape(1, -1) ) )
 
 
 #plotting
@@ -71,4 +78,5 @@ plt.ylabel('PC 1')
 
 # Done
 plt.show()
+
 

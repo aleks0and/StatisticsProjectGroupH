@@ -45,7 +45,7 @@ def pca_top2_extraction_testing(data):
 
 def pca_exercise():
     path = r'./data/wines_properties.csv'
-    data = prepare_and_load_data(path,skiprows=0)
+    data = prepare_and_load_data(path,skip_rows=0)
     x_s = quantify_data(data, True)
     covariance_matrix = np.cov(x_s.T)
     eigen_values, eigen_vectors = np.linalg.eig(covariance_matrix)
@@ -88,4 +88,4 @@ def pca_exercise():
 
 
 
-#pca_exercise()
+pca_exercise()
