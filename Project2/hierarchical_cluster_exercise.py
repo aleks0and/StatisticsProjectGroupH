@@ -33,12 +33,12 @@ def hierarchical_cluster_analysis():
     plt.xlabel("Cluster Labels excluded for better comprehension")
     plt.ylabel("Dist")
     fig = plt.figure()
-
     plt.tight_layout()
-    plt.ylabel("Dist")
     plt.show()
 
     return None
+
+hierarchical_cluster_analysis()
 
 
 # with specified PCA Factors Alcohol and Malic_Acid 
