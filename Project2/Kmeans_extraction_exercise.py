@@ -68,6 +68,6 @@ def best_k_for_kmeans():
     plot_clusters(wine_data_reduced_matrix, predicted_clusters, kmeans_setup, last_best_cluster_index)
     return last_best_cluster_index
 
-path = r'./data/wines_properties.csv'
-wine_data = prepare_and_load_data(path, skip_rows=0)
-number = best_k_for_kmeans_given_data(wine_data)
+# path = r'./data/wines_properties.csv'
+# wine_data = prepare_and_load_data(path, skip_rows=0)
+# number = best_k_for_kmeans_given_data(wine_data)
