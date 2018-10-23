@@ -5,6 +5,7 @@ from sklearn.cluster import KMeans
 from matplotlib import cm
 from sklearn.metrics import silhouette_samples
 from util import prepare_and_load_data, plot_clusters, quantify_data
+from Kmeans_exercise import pca_top2_extraction
 pd.set_option('display.max_columns', 20)
 
 
@@ -77,11 +78,14 @@ def silhouette():
 def assignment2_point3_top2_eigenvalues():
     
     #Data processing
+    # path = r'./data/wines_properties.csv'
+    # wine_data = prepare_and_load_data(path, skip_rows=0)
+    # wine_data_reduced = wine_data.loc[:, ['Alcohol', 'Malic_Acid']]
+    # wine_data_reduced_matrix = quantify_data(wine_data_reduced, False)
     path = r'./data/wines_properties.csv'
     wine_data = prepare_and_load_data(path, skip_rows=0)
-    wine_data_reduced = wine_data.loc[:, ['Alcohol', 'Malic_Acid']]
-    wine_data_reduced_matrix = quantify_data(wine_data_reduced, False)
-    
+    first_two_principal_components = pca_top2_extraction(wine_data)
+    wine_data_reduced = quantify_data(wine_data, True).dot(first_two_principal_components)
     #Performing Kmeans
     number_of_clusters = 3
     kmeans_init = KMeans(n_clusters=number_of_clusters,
