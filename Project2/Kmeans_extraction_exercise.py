@@ -31,6 +31,7 @@ def best_k_for_kmeans_given_data(data):
     plot_clusters(wine_data_reduced_matrix, predicted_clusters, kmeans_setup, last_best_cluster_index)
     return last_best_cluster_index
 
+
 def best_k_for_kmeans():
     path = r'./data/wines_properties.csv'
     wine_data = prepare_and_load_data(path, skip_rows=0)

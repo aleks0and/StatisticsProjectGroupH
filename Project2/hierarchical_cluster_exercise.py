@@ -24,7 +24,6 @@ def hierarchical_cluster_analysis():
     plt.title ("Hierachical Analysis including 14 dimensions")
     plt.xlabel("Cluster Labels excluded for better comprehension")
     plt.ylabel("Dist")
-    fig = plt.figure()
     plt.tight_layout()
     plt.show()
 

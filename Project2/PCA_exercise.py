@@ -86,7 +86,7 @@ def scree_plot():
     X_s = quantify_data(data, True)
     mean_vector = np.mean(X_s, axis = 0)
     N = X_s.shape[0]
-    #Generating the Covariance Matrix, Eigenvectors and Eigenvalues
+    # Generating the Covariance Matrix, Eigenvectors and Eigenvalues
     covariance_matrix = (X_s - mean_vector).T.dot((X_s - mean_vector)) / (N-1)
     eigen_values, eigen_vectors = np.linalg.eig(covariance_matrix)
     pd.DataFrame(eigen_values)
