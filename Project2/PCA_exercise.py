@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import plotly as py
 from util import prepare_and_load_data, quantify_data, plot_clusters
+import matplotlib.cm as cm
 
 
 
@@ -43,7 +44,7 @@ def pca_top2_extraction_testing(data):
 
 def pca_exercise():
     path = r'./data/wines_properties.csv'
-    data = prepare_and_load_data(path,skip_rows=0)
+    data = prepare_and_load_data(path ,skip_rows = 0)
     x_s = quantify_data(data, True)
     covariance_matrix = np.cov(x_s.T)
     eigen_values, eigen_vectors = np.linalg.eig(covariance_matrix)
@@ -54,28 +55,26 @@ def pca_exercise():
     top2_eigenvectors = np.hstack((eigen_vectors_values[0][1].reshape(len(eigen_values), 1),
                                    eigen_vectors_values[1][1].reshape(len(eigen_values), 1),
                                    ))
-
     py.offline.init_notebook_mode(connected=True)
-    # Get the PCA components (loadings)
-    PCs = top2_eigenvectors
-    # Use quiver to generate the basic plot
+    PCs = eigen_vectors
+    colors = cm.rainbow(np.linspace(0, 1, len(PCs)))
     fig = plt.figure(figsize=(5, 5))
     plt.quiver(np.zeros(PCs.shape[1]), np.zeros(PCs.shape[1]),
                PCs[0, ], PCs[1, :],
-               angles='xy', scale_units='xy', scale=1)
-
-    feature_names = list(i for i in range(0,2))
+               angles='xy', scale_units='xy', scale=1, color=colors)
+    feature_names = list(i for i in range(0,14))
     for i, j, z in zip(PCs[1, :]+0.02, PCs[0, :]+0.02, feature_names):
         plt.text(j, i, z, ha='center', va='center')
-
-    # Add unit circle
     circle = plt.Circle((0, 0), 1, facecolor='none', edgecolor='b')
     plt.gca().add_artist(circle)
+
     plt.axis('equal')
     plt.xlim([-1.0, 1.0])
     plt.ylim([-1.0, 1.0])
+
     plt.xlabel('PC 0')
     plt.ylabel('PC 1')
+
     plt.show()
 
 
