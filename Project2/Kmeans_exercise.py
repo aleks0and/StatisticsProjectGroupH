@@ -5,7 +5,7 @@ from sklearn.cluster import KMeans
 from matplotlib import cm
 from sklearn.metrics import silhouette_samples
 from util import prepare_and_load_data, plot_clusters, quantify_data
-from Kmeans_exercise import pca_top2_extraction
+from PCA_exercise import pca_top2_extraction
 pd.set_option('display.max_columns', 20)
 
 
@@ -91,7 +91,7 @@ def assignment2_point3_top2_eigenvalues():
     kmeans_init = KMeans(n_clusters=number_of_clusters,
                          init='random')
     wine_predicted_clusters = kmeans_init.fit_predict(wine_data_reduced)
-    plot_clusters(wine_data_reduced_matrix, wine_predicted_clusters, kmeans_init, number_of_clusters)
+    plot_clusters(wine_data_reduced, wine_predicted_clusters, kmeans_init, number_of_clusters)
     print("plotted assignment2_point3")
     return None
 #assignment2_point3_top2_eigenvalues()
@@ -169,3 +169,4 @@ def original_vars_PCA():
     return top2_withnames
 
 #original_vars_PCA()
+#assignment2_point3_top2_eigenvalues()
