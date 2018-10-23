@@ -135,9 +135,9 @@ def original_vars_PCA():
     top2_eigenvectors = np.hstack((eigen_pairs[0][1].reshape(len(eigen_values), 1),
                                    eigen_pairs[1][1].reshape(len(eigen_values), 1)))
     
-    top2_withnames = pd.DataFrame(top2_eigenvectors, columns = [eigen_pairs[0][2],eigen_pairs[1][2]])
-    print(top2_withnames)
-    return top2_withnames
+    top2_withnames_cluster1 = pd.DataFrame(top2_eigenvectors, columns = [eigen_pairs[0][2],eigen_pairs[1][2]])
+    print("Printing results for cluster1")
+    print(top2_withnames_cluster1)
 
 
     # PCA for the second cluster
@@ -150,9 +150,10 @@ def original_vars_PCA():
     top2_eigenvectors = np.hstack((eigen_pairs[0][1].reshape(len(eigen_values), 1),
                                    eigen_pairs[1][1].reshape(len(eigen_values), 1)))
     
-    top2_withnames = pd.DataFrame(top2_eigenvectors, columns = [eigen_pairs[0][2],eigen_pairs[1][2]])
-    print(top2_withnames)
-    return top2_withnames
+    top2_withnames_cluster2 = pd.DataFrame(top2_eigenvectors, columns = [eigen_pairs[0][2],eigen_pairs[1][2]])
+    print("Printing results for cluster2")
+    print(top2_withnames_cluster2)
+
 
   # PCA for the third cluster
     x_s = quantify_data(cluster3, True)
@@ -164,9 +165,9 @@ def original_vars_PCA():
     top2_eigenvectors = np.hstack((eigen_pairs[0][1].reshape(len(eigen_values), 1),
                                    eigen_pairs[1][1].reshape(len(eigen_values), 1)))
     
-    top2_withnames = pd.DataFrame(top2_eigenvectors, columns = [eigen_pairs[0][2],eigen_pairs[1][2]])
-    print(top2_withnames)
-    return top2_withnames
+    top2_withnames_cluster3 = pd.DataFrame(top2_eigenvectors, columns = [eigen_pairs[0][2],eigen_pairs[1][2]])
+    print("Printing results for cluster3")
+    print(top2_withnames_cluster3)
 
 #original_vars_PCA()
 #assignment2_point3_top2_eigenvalues()
