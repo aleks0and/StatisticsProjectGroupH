@@ -64,7 +64,7 @@ def pca_exercise():
                PCs[0, ], PCs[1, :],
                angles='xy', scale_units='xy', scale=1)
 
-    feature_names = list(data)
+    feature_names = list(i for i in range(0,2))
     for i, j, z in zip(PCs[1, :]+0.02, PCs[0, :]+0.02, feature_names):
         plt.text(j, i, z, ha='center', va='center')
 
