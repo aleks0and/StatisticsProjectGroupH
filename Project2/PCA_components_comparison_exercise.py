@@ -52,7 +52,6 @@ def principal_components_comparison_given_data(data, column_id):
     eigen_vectors_values = [(np.abs(eigen_values[i]), eigen_vectors[:, i])
                             for i in range(len(eigen_vectors))]
     py.offline.init_notebook_mode(connected=True)
-    feature_names = list(data)
     PCs = eigen_vectors
     colors = cm.rainbow(np.linspace(0, 1, 2))
     compared_vectors_name = []
@@ -61,8 +60,8 @@ def principal_components_comparison_given_data(data, column_id):
     for i in range(0,len(PCs)):
         if i != column_id:
             compared_vectors_name.clear()
-            compared_vectors_name.append(feature_names[column_id])
-            compared_vectors_name.append(feature_names[i])
+            compared_vectors_name.append("PCA " + str(column_id))
+            compared_vectors_name.append("PCA " + str(i))
             plt.subplot(3, 5, i+1)
             plt.axis('equal')
             plt.xlim([-1.0, 1.0])
